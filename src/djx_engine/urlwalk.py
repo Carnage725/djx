@@ -24,34 +24,6 @@ class Entry:
     extra: dict[str, Any] = field(default_factory=dict)
 
 
-def _path_view_class() -> Any:
-    try:
-        from ninja.operation import PathView
-    except ImportError:
-        return None
-    return PathView
-
-
-def find_path_view(callback: Any, path_view_class: Any) -> Any:
-    """Ninja 1.7 hands Django a closure that captures its PathView as `self`.
-
-    Older versions used a bound method. Support both.
-    """
-    if path_view_class is None:
-        return None
-    owner = getattr(callback, "__self__", None)
-    if isinstance(owner, path_view_class):
-        return owner
-    for cell in getattr(callback, "__closure__", None) or ():
-        try:
-            value = cell.cell_contents
-        except ValueError:  # empty cell
-            continue
-        if isinstance(value, path_view_class):
-            return value
-    return None
-
-
 def _group_names(pattern: Any) -> list[str]:
     try:
         groups = pattern.regex.groupindex
@@ -75,11 +47,13 @@ def _piece(pattern: Any) -> str:
     return text
 
 
-def walk(collector: str) -> Iterator[Entry]:
+def walk(collector: str, matcher: Any = None) -> Iterator[Entry]:
+    # Imported here: the collectors package imports this module, so a top-level import would loop.
     from django.urls import URLResolver, get_resolver
 
-    path_view_class = _path_view_class()
-    counters: dict[int, int] = {}
+    from djx_engine.collectors.ninja_introspect import NinjaMatcher
+
+    matcher = matcher or NinjaMatcher()
 
     def visit(
         patterns: Any, prefix: str, namespaces: list[str], args: list[str], unnamed: int
@@ -98,15 +72,7 @@ def walk(collector: str) -> Iterator[Entry]:
                 yield from visit(children, route, inner, p_args, p_unnamed)
                 continue
             name = ":".join([*namespaces, p.name]) if p.name else None
-            operation = None
-            path_view = find_path_view(p.callback, path_view_class)
-            if path_view is not None:
-                # Ninja yields one URLPattern per operation, in operation order.
-                index = counters.get(id(path_view), 0)
-                counters[id(path_view)] = index + 1
-                if index >= len(path_view.operations):
-                    continue
-                operation = path_view.operations[index]
+            operation = matcher.operation_for(p.callback)
             yield Entry(
                 callback=p.callback,
                 route=route,

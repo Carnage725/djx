@@ -3,6 +3,8 @@ from __future__ import annotations
 import inspect
 from typing import Any
 
+from djx_engine import diagnostics
+from djx_engine.collectors.ninja_introspect import NinjaMatcher
 from djx_engine.sources import source_of, unwrap, view_origin
 from djx_engine.urlwalk import Entry, display_path, dotted, first_doc_line, walk
 
@@ -91,12 +93,15 @@ def _django_endpoint(entry: Entry, path: str) -> dict[str, Any]:
 
 def collect_endpoints() -> list[dict[str, Any]]:
     result = []
-    for entry in walk("endpoints"):
+    matcher = NinjaMatcher()
+    for entry in walk("endpoints", matcher):
         path = display_path(entry.route)
         if entry.operation is not None:
             result.extend(_ninja_endpoints(entry, path))
         else:
             result.append(_django_endpoint(entry, path))
+    for message in matcher.warnings():
+        diagnostics.warn("endpoints", message)
     return sorted(
         result, key=lambda e: (e["kind"], e["path"], e["methods"][0] if e["methods"] else "")
     )

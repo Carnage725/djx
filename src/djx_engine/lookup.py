@@ -5,9 +5,10 @@ from __future__ import annotations
 from typing import Any
 
 from djx_engine.bootstrap import EngineError
+from djx_engine.collectors.ninja_introspect import find_path_view
 from djx_engine.contract import SCHEMA_VERSION
 from djx_engine.sources import source_of
-from djx_engine.urlwalk import _path_view_class, dotted, find_path_view
+from djx_engine.urlwalk import dotted
 
 
 def _ok(data: dict[str, Any]) -> dict[str, Any]:
@@ -39,7 +40,7 @@ def resolve_path(path: str) -> dict[str, Any]:
         ) from exc
     view = match.func
     methods: list[str] = []
-    path_view = find_path_view(view, _path_view_class())
+    path_view = find_path_view(view)
     if path_view is not None and path_view.operations:
         # Django picked the first pattern, which belongs to the first operation.
         view = path_view.operations[0].view_func
