@@ -21,6 +21,8 @@ packages = ["src/djx", "src/djx_engine"]
 
 [tool.ruff]
 line-length = 100
+src = ["src", "sandbox"]
+extend-exclude = ["sandbox/*/migrations"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

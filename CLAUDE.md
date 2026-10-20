@@ -22,8 +22,10 @@
   ```
 - Loop until the checks pass.
 
-5. Accuracy
+5. Accuracy and certain rules
 - Before coding or planning always access the relevant docs using webfetch or context7
+- Do not add co-authored by claude to any commits
+
 # djx rules
 
 ## Architecture
