@@ -19,6 +19,7 @@ from textual.widgets.tree import TreeNode
 
 from djx import apps_view, commands_view, endpoints_view, models_view, urls_view
 from djx.engine_client import EngineClient, Envelope, find_python
+from djx.jump import open_in_editor, source_of_item
 from djx.screens import NARROW_FOOTER, ErrorScreen, HelpScreen, WarningsScreen
 from djx.tree_model import Context, Group
 
@@ -81,9 +82,10 @@ class DjxApp(App):
         Binding("q", "quit", "Quit"),
     ]
 
-    def __init__(self, client: Any):
+    def __init__(self, client: Any, editor: str | None = None):
         super().__init__()
         self.client = client
+        self.djx_editor = editor
         self.envelope: Envelope | None = None
         self.section = 1
         self.search_text = ""
@@ -537,7 +539,14 @@ class DjxApp(App):
             self.query_one("#tree", Tree).action_cursor_up()
 
     def action_open(self) -> None:
-        self.notify("Open in editor: coming in a later step.")
+        """Open the selected item's source in the editor (Enter on a wide list, or `o`)."""
+        item = self.djx_selected_item
+        if item is None or self.envelope is None:
+            self.notify("Nothing selected", severity="warning")
+            return
+        source = source_of_item(self.section, item)
+        result = open_in_editor(source, self.envelope.project["root"], self.djx_editor)
+        self.notify(result.message, severity=result.severity, markup=False)
 
     def action_toggle_framework(self) -> None:
         self.show_framework = not self.show_framework
@@ -564,9 +573,10 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--root", default=".")
     parser.add_argument("--python")
     parser.add_argument("--settings")
+    parser.add_argument("--editor", help='command template, e.g. "zed {file}:{line}"')
     args = parser.parse_args(argv)
     client = EngineClient(args.root, find_python(args.root, args.python), args.settings)
-    DjxApp(client).run()
+    DjxApp(client, args.editor).run()
 
 
 if __name__ == "__main__":
