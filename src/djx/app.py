@@ -111,12 +111,12 @@ class DjxApp(App):
         with Horizontal(id="sections"):
             for number in range(1, len(SECTIONS) + 1):
                 yield SectionLabel(number)
-        yield Input(placeholder="/ search", id="search")
+        yield Input(placeholder="/ search", id="search", disabled=True)  # enabled once loaded
         yield Static(id="summary")
         with Horizontal(id="body"):
             with Vertical(id="list-pane"):
                 yield LoadingIndicator(id="loading")
-                yield Input(placeholder="p: resolve a path, e.g. /blog/hello/", id="resolve-input")
+                yield Input(placeholder="p: resolve a path, e.g. /blog/hello/", id="resolve-input", disabled=True)
                 yield Static(id="resolve-result", markup=False)
                 yield Tree("root", id="tree")
             with VerticalScroll(id="detail-pane"):
@@ -199,6 +199,8 @@ class DjxApp(App):
             self.push_screen(ErrorScreen(envelope.error))
             return
         self.envelope = envelope
+        for name in ("#search", "#resolve-input"):  # disabled until now so they cannot grab focus
+            self.query_one(name, Input).disabled = False
         self.djx_shown = None
         self.djx_refresh_top()
         self.djx_rebuild()

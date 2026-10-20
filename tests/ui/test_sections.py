@@ -321,3 +321,24 @@ async def test_selecting_a_url_without_args_reverses_exactly_once():
         await pilot.pause(0.5)
         await settle(pilot)
         assert calls.count("home") == 1
+
+
+async def test_keys_work_while_the_engine_is_still_loading():
+    import time
+
+    class Slow(FakeEngineClient):
+        def collect(self):
+            time.sleep(0.8)
+            return super().collect()
+
+    app = DjxApp(Slow())
+    async with app.run_test(size=(100, 30)) as pilot:
+        await pilot.pause(0.2)
+        assert app.query_one("LoadingIndicator").display
+        await pilot.press("question_mark")  # must open help, not type into the search box
+        await pilot.pause(0.2)
+        assert type(app.screen).__name__ == "HelpScreen"
+        assert app.query_one("#search", Input).value == ""
+        await pilot.press("escape")
+        await settle(pilot)
+        assert leaves(app.query_one("#tree", Tree))
