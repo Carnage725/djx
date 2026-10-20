@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from pathlib import Path
+from dataclasses import dataclass
 from typing import Any
 
 from rich.text import Text
+
+from djx.tree_model import Context, Detail, Group, Leaf, matches_all, rows_text
 
 METHOD_STYLES = {
     "GET": "bold white on green",
@@ -20,6 +21,9 @@ METHOD_STYLES = {
 
 def is_visible(endpoint: dict[str, Any], show_framework: bool) -> bool:
     return show_framework or endpoint["origin"] == "local"
+
+
+visible = is_visible
 
 
 def method_label(endpoint: dict[str, Any]) -> str:
@@ -39,8 +43,8 @@ def matches(endpoint: dict[str, Any], query: str) -> bool:
             endpoint["view"],
             " ".join(endpoint["tags"]),
         ]
-    ).lower()
-    return all(token in haystack for token in query.lower().split())
+    )
+    return matches_all(haystack, query)
 
 
 def mount_prefix(endpoints: list[dict[str, Any]]) -> list[str]:
@@ -67,19 +71,6 @@ def label(endpoint: dict[str, Any], path: str) -> Text:
         text.append(" async", style="dim italic")
     return text
 
-
-
-@dataclass
-class Leaf:
-    endpoint: dict[str, Any]
-    path: str  # what the tree shows (Ninja paths drop the mount prefix)
-
-
-@dataclass
-class Group:
-    title: str
-    items: list[Group | Leaf] = field(default_factory=list)
-    collapsed: bool = False
 
 
 @dataclass
@@ -126,7 +117,7 @@ def build_groups(
                 continue
             parts = [s for s in endpoint["path"].split("/") if s][len(prefix) :]
             segment = segments.setdefault(parts[0] if parts else "/", Group(parts[0] if parts else "/"))
-            segment.items.append(Leaf(endpoint, short_path(endpoint, prefix)))
+            segment.items.append(Leaf(endpoint, label(endpoint, short_path(endpoint, prefix))))
         if segments:
             groups.append(Group(f"{key[0]} {key[1]}", list(segments.values())))
 
@@ -137,7 +128,7 @@ def build_groups(
         name = endpoint["url_name"] or ""
         namespace = name.split(":")[0] if ":" in name else "root"
         namespaces.setdefault(namespace, Group(namespace)).items.append(
-            Leaf(endpoint, endpoint["path"])
+            Leaf(endpoint, label(endpoint, endpoint["path"]))
         )
     if namespaces:
         ordered = sorted(namespaces.values(), key=lambda g: (g.title != "root", g.title))
@@ -145,19 +136,7 @@ def build_groups(
     return groups, counts
 
 
-def source_text(source: dict[str, Any], root: str) -> str:
-    """`relative/path.py:LINE`, a plain string so Cmd+Click works in Zed's terminal."""
-    file = source.get("file")
-    if not file:
-        return "(no source location)"
-    try:
-        file = str(Path(file).relative_to(root))
-    except ValueError:
-        pass
-    return f"{file}:{source['line']}" if source.get("line") else file
-
-
-def detail(endpoint: dict[str, Any], root: str) -> Text:
+def detail(endpoint: dict[str, Any], ctx: Context) -> Detail:
     rows = [
         ("Method", ", ".join(endpoint["methods"]) or "ANY"),
         ("Path", endpoint["path"]),
@@ -174,10 +153,18 @@ def detail(endpoint: dict[str, Any], root: str) -> Text:
         ("Async", "yes" if endpoint["is_async"] else "no"),
         ("Origin", endpoint["origin"]),
     ]
-    text = Text()
-    for name, value in rows:
-        text.append(f"{name}\n", style="bold")
-        text.append(f"{value}\n\n")
-    text.append("Source\n", style="bold")
-    text.append(source_text(endpoint["source"], root))
-    return text
+    return Detail(rows_text(rows, endpoint["source"], ctx.root))
+
+
+# ---- section interface used by the app ----
+
+ITEMS = "endpoints"
+
+
+def key(endpoint: dict[str, Any]) -> str:
+    return endpoint["id"]
+
+
+def build(data: dict[str, Any], query: str, show_framework: bool) -> tuple[list[Group], str]:
+    groups, counts = build_groups(data["endpoints"], query, show_framework)
+    return groups, counts.text()

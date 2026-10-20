@@ -67,8 +67,7 @@ async def test_other_sections_do_not_crash(app):
             await pilot.press(key)
             await settle(pilot)
             assert app.section == int(key)
-            tree = app.query_one("#tree", Tree)
-            assert tree.root.children[0].label.plain == "coming in next step"
+            assert leaves(app.query_one("#tree", Tree))
         await pilot.press("1")
         await settle(pilot)
         assert leaves(app.query_one("#tree", Tree))

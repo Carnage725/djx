@@ -1,7 +1,10 @@
+import io
 import json
+import re
 from pathlib import Path
 
 import pytest
+from rich.console import Console
 
 from djx.app import DjxApp
 from djx.engine_client import Envelope, error_envelope
@@ -28,10 +31,31 @@ class FakeEngineClient:
         return self.envelope
 
     def reverse(self, name, args=None, kwargs=None) -> Envelope:
-        return error_envelope("NotImplemented", "fake", "")
+        """Same answers as the real engine for the sandbox's simple routes."""
+        kwargs = kwargs or {}
+        for url in self.envelope.data["url_names"]:
+            if url["name"] != name:
+                continue
+            try:
+                path = re.sub(r"<(?:\w+:)?(\w+)>", lambda m: kwargs[m.group(1)], url["route"])
+            except KeyError:
+                continue
+            return Envelope(ok=True, data={"url": path})
+        return error_envelope("NoReverseMatch", f"Reverse for '{name}' not found.", "")
 
     def resolve(self, path) -> Envelope:
-        return error_envelope("NotImplemented", "fake", "")
+        for endpoint in self.envelope.data["endpoints"]:
+            pattern = re.sub(r"\{\w+\}", "[^/]+", re.escape(endpoint["path"]).replace("\\{", "{").replace("\\}", "}"))
+            if re.fullmatch(pattern.rstrip("/") + "/?", path):
+                data = {
+                    "view": endpoint["view"],
+                    "url_name": endpoint["url_name"],
+                    "kwargs": {},
+                    "methods": endpoint["methods"],
+                    "source": endpoint["source"],
+                }
+                return Envelope(ok=True, data=data)
+        return error_envelope("Resolver404", f"No URL matches {path!r}.", "")
 
 
 @pytest.fixture
@@ -64,3 +88,19 @@ def leaves(tree):
 
     walk(tree.root)
     return found
+
+
+def plain(renderable) -> str:
+    """Render any Rich renderable (or str) to plain text, like the terminal would show it."""
+    console = Console(file=io.StringIO(), width=100, record=True, color_system=None)
+    console.print(renderable)
+    return console.export_text()
+
+
+def link_texts(app) -> list[str]:
+    options = app.query_one("#links")
+    return [str(options.get_option_at_index(i).prompt) for i in range(options.option_count)]
+
+
+def group_titles(app) -> list[str]:
+    return [n.label.plain for n in app.query_one("#tree").root.children]

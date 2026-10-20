@@ -110,3 +110,47 @@ WarningsScreen, HelpScreen {
     color: $text-muted;
     margin-top: 1;
 }
+
+#resolve-input {
+    height: 1;
+    border: none;
+    padding: 0 1;
+    background: $boost;
+}
+
+#resolve-result {
+    height: auto;
+    max-height: 4;
+    padding: 0 1;
+    color: $success;
+}
+
+#links {
+    height: auto;
+    max-height: 18;
+    margin-top: 1;
+    border: none;
+    padding: 0;
+}
+
+#url-form {
+    height: auto;
+    margin-top: 1;
+}
+
+#form-hint {
+    text-style: bold;
+}
+
+#arg-inputs {
+    height: auto;
+}
+
+ArgInput {
+    height: 3;
+}
+
+#reverse-result {
+    height: auto;
+    padding: 1 0;
+}
