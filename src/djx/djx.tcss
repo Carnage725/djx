@@ -1,0 +1,112 @@
+Screen {
+    layout: vertical;
+}
+
+#top {
+    height: auto;
+    padding: 0 1;
+    background: $boost;
+}
+
+#sections {
+    height: 1;
+    padding: 0 1;
+}
+
+SectionLabel {
+    width: auto;
+    margin-right: 1;
+    color: $text-muted;
+}
+
+SectionLabel.active {
+    color: $text;
+    text-style: bold reverse;
+}
+
+#search {
+    height: 3;
+}
+
+#summary {
+    height: 1;
+    padding: 0 1;
+    color: $text-muted;
+}
+
+#body {
+    height: 1fr;
+}
+
+#list-pane {
+    width: 2fr;
+}
+
+#detail-pane {
+    width: 3fr;
+    padding: 0 1;
+    border-left: tall $primary-background;
+}
+
+#tree {
+    height: 1fr;
+}
+
+#loading {
+    height: 1fr;
+}
+
+#back-hint {
+    color: $text-muted;
+    padding-bottom: 1;
+}
+
+ErrorScreen #error-body {
+    padding: 1 2;
+}
+
+#error-type {
+    text-style: bold;
+    color: $error;
+}
+
+#error-message {
+    margin-bottom: 1;
+}
+
+#error-hint {
+    color: $warning;
+    margin-bottom: 1;
+}
+
+#error-traceback-title {
+    text-style: bold;
+}
+
+#error-traceback {
+    color: $text-muted;
+}
+
+WarningsScreen, HelpScreen {
+    align: center middle;
+}
+
+#dialog {
+    width: 90%;
+    max-width: 80;
+    height: auto;
+    max-height: 80%;
+    padding: 1 2;
+    border: round $primary;
+    background: $surface;
+}
+
+.dialog-title {
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.dim {
+    color: $text-muted;
+    margin-top: 1;
+}
