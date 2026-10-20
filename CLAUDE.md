@@ -43,6 +43,7 @@
 - Never block the UI thread. Engine calls run in a Textual worker.
 - Narrow-first: the app must be fully usable at 50 columns wide. Wide terminals get two panes.
 - Keyboard first, mouse also works.
+- Never define a method or attribute on an App or Widget subclass without checking it does not already exist on Textual's base classes. Prefix our own helpers with `djx_` (e.g. `djx_view_context`). Underscore-only names are risky because Textual uses many. `tests/ui/test_no_shadowing.py` enforces this.
 
 ## Quality
 - Every change leaves `uv run pytest` and `uv run ruff check .` green.

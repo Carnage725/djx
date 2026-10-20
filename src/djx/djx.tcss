@@ -103,7 +103,7 @@ WarningsScreen, HelpScreen {
 
 .dialog-title {
     text-style: bold;
-    margin-bottom: 1;
+    margin-top: 1;
 }
 
 .dim {
@@ -153,4 +153,11 @@ ArgInput {
 #reverse-result {
     height: auto;
     padding: 1 0;
+}
+
+#narrow-footer {
+    height: 1;
+    padding: 0 1;
+    background: $panel;
+    color: $text;
 }

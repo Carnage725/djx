@@ -80,11 +80,11 @@ async def test_enter_on_relation_navigates_and_backspace_returns(app):
         assert app.query_one("#links", OptionList).has_focus
         await pilot.press("enter")  # first non-heading link: category
         await settle(pilot)
-        assert app._selected_key == "shop.Category"
+        assert app.djx_selected_key == "shop.Category"
         assert "shop_category" in detail_text(app)
         await pilot.press("backspace")
         await settle(pilot)
-        assert app._selected_key == "shop.Product"
+        assert app.djx_selected_key == "shop.Product"
 
 
 async def test_relation_to_hidden_model_reveals_framework(app):
@@ -95,11 +95,11 @@ async def test_relation_to_hidden_model_reveals_framework(app):
         await pilot.press("l")
         await pilot.press("enter")  # Customer.user -> auth.User (hidden by default)
         await settle(pilot)
-        assert app._selected_key == "auth.User"
+        assert app.djx_selected_key == "auth.User"
         assert app.show_framework is True
         await pilot.press("backspace")
         await settle(pilot)
-        assert app._selected_key == "shop.Customer"
+        assert app.djx_selected_key == "shop.Customer"
 
 
 # ---- apps ----
@@ -121,10 +121,10 @@ async def test_apps_grouped_by_origin_and_jump_to_model(app):
         await pilot.press("enter")
         await settle(pilot)
         assert app.section == 2
-        assert app._selected_key.startswith("shop.")
+        assert app.djx_selected_key.startswith("shop.")
         await pilot.press("backspace")
         await settle(pilot)
-        assert app.section == 3 and app._selected_key == "shop"
+        assert app.section == 3 and app.djx_selected_key == "shop"
 
 
 # ---- commands ----
@@ -296,8 +296,28 @@ async def test_narrow_cross_link_stays_in_detail_and_backspace_returns(app):
         await pilot.press("l")
         await pilot.press("enter")
         await settle(pilot)
-        assert app._selected_key == "shop.Category"
+        assert app.djx_selected_key == "shop.Category"
         assert app.query_one("#detail-pane").display and not app.query_one("#list-pane").display
         await pilot.press("backspace")
         await settle(pilot)
-        assert app._selected_key == "shop.Product"
+        assert app.djx_selected_key == "shop.Product"
+
+
+async def test_selecting_a_url_without_args_reverses_exactly_once():
+    client = FakeEngineClient()
+    calls = []
+    original = client.reverse
+    client.reverse = lambda name, *a, **k: (calls.append(name), original(name, *a, **k))[1]
+    app = DjxApp(client)
+    async with app.run_test(size=(140, 40)) as pilot:
+        await settle(pilot)
+        await pilot.press("5")  # first URL is `home`, which takes no args
+        await pilot.pause(0.5)
+        await settle(pilot)
+        assert app.djx_selected_item["name"] == "home"
+        assert calls == ["home"]
+        # Moving away and back is a new request, not a repeat of the old one.
+        await pilot.press("j")
+        await pilot.pause(0.5)
+        await settle(pilot)
+        assert calls.count("home") == 1

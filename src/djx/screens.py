@@ -8,22 +8,69 @@ from textual.containers import VerticalScroll
 from textual.screen import ModalScreen, Screen
 from textual.widgets import Footer, Static
 
-HELP_ROWS = [
-    ("1-5", "Switch section"),
-    ("Tab / Shift-Tab", "Next / previous section"),
-    ("/", "Focus search"),
-    ("Esc", "Clear search / go back"),
-    ("j k  ↑ ↓", "Move"),
-    ("Enter", "Open details (narrow) or open in editor"),
-    ("o", "Open in editor"),
-    ("l / →", "Focus relations / reverse form"),
-    ("Backspace", "Back after following a link"),
-    ("p", "Resolve a path (URLs)"),
-    ("b", "Show / hide framework items"),
-    ("r", "Refresh"),
-    ("w", "Warnings"),
-    ("?", "This help"),
-    ("q", "Quit"),
+# Shown instead of Textual's Footer under 100 columns; everything else is on the `?` screen.
+NARROW_FOOTER = "/ search  ⏎ details  o open  ? help  q quit"
+
+# Every key the app binds appears here. tests/ui/test_help.py checks that.
+HELP_GROUPS = [
+    (
+        "Everywhere",
+        [
+            ("1-5", "Switch section"),
+            ("Tab / Shift-Tab", "Next / previous section"),
+            ("/", "Focus search"),
+            ("Esc", "Clear search, leave a form or list, go back"),
+            ("j k  ↑ ↓", "Move"),
+            ("o", "Open the selected item in your editor"),
+            ("r", "Refresh"),
+            ("w", "Warnings"),
+            ("?", "This help"),
+            ("q", "Quit"),
+        ],
+    ),
+    (
+        "Endpoints",
+        [
+            ("Enter", "Open in editor (wide) / show details (narrow)"),
+            ("b", "Show / hide framework endpoints"),
+        ],
+    ),
+    (
+        "Models",
+        [
+            ("Enter", "Open in editor (wide) / show details (narrow)"),
+            ("l / →", "Focus the relation list"),
+            ("Enter on a relation", "Go to that model"),
+            ("Backspace", "Back to the previous model"),
+            ("b", "Show / hide Django built-in models"),
+        ],
+    ),
+    (
+        "Apps",
+        [
+            ("Enter", "Open the app in your editor (wide) / details (narrow)"),
+            ("l / →", "Focus the model list"),
+            ("Enter on a model", "Go to that model"),
+            ("Backspace", "Back to the app"),
+        ],
+    ),
+    (
+        "Commands",
+        [
+            ("Enter", "Open in editor (wide) / show details (narrow)"),
+            ("b", "Show / hide Django built-in commands"),
+        ],
+    ),
+    (
+        "URLs",
+        [
+            ("Enter", "Open in editor (wide) / show details (narrow)"),
+            ("l / →", "Fill in the args form"),
+            ("Enter in the form", "Next field"),
+            ("p", "Resolve a path"),
+            ("b", "Show / hide framework URLs"),
+        ],
+    ),
 ]
 
 
@@ -77,9 +124,10 @@ class HelpScreen(ModalScreen):
 
     def compose(self) -> ComposeResult:
         with VerticalScroll(id="dialog"):
-            yield Static("Keys", classes="dialog-title")
-            for keys, what in HELP_ROWS:
-                yield Static(f"{keys:<16}{what}", markup=False)
+            for title, rows in HELP_GROUPS:
+                yield Static(title, classes="dialog-title")
+                for keys, what in rows:
+                    yield Static(f"{keys}\n    {what}", markup=False)
             yield Static("Esc to close", classes="dim")
 
     def action_close(self) -> None:

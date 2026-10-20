@@ -10,7 +10,14 @@ dependencies = ["textual"]
 djx = "djx.cli:main"
 
 [dependency-groups]
-dev = ["pytest", "pytest-asyncio", "ruff", "django", "django-ninja"]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+    "django",
+    "django-ninja",
+    "pytest-timeout>=2.4.0",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -26,6 +33,7 @@ extend-exclude = ["sandbox/*/migrations"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+timeout = 30  # a hung UI test must fail, not freeze the run
 testpaths = ["tests"]
 
 [tool.ruff.lint]
