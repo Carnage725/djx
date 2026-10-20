@@ -3,8 +3,15 @@ name = "djx"
 version = "0.1.0"
 description = "Terminal UI that explores a Django + Django Ninja project and jumps to code in Zed."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["django", "django-ninja", "tui", "textual", "zed"]
 requires-python = ">=3.12"
 dependencies = ["textual"]
+
+[project.urls]
+Homepage = "https://github.com/Carnage725/djx"
+Issues = "https://github.com/Carnage725/djx/issues"
 
 [project.scripts]
 djx = "djx.cli:main"

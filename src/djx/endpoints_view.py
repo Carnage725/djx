@@ -10,12 +10,12 @@ from rich.text import Text
 from djx.tree_model import Context, Detail, Group, Leaf, matches_all, rows_text
 
 METHOD_STYLES = {
-    "GET": "bold white on green",
-    "POST": "bold white on blue",
-    "PUT": "bold white on dark_orange",
-    "PATCH": "bold black on yellow",
-    "DELETE": "bold white on red",
-    "ANY": "bold white on grey42",
+    "GET": "bold white on #2e7d32",
+    "POST": "bold white on #1565c0",
+    "PUT": "bold white on #e65100",
+    "PATCH": "bold black on #f9a825",
+    "DELETE": "bold white on #c62828",
+    "ANY": "bold white on #616161",
 }
 
 
