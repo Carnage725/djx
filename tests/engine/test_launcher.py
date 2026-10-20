@@ -14,14 +14,14 @@ def run(*argv):
     return proc.returncode, json.loads(proc.stdout)
 
 
-def test_collect_sandbox_returns_empty_envelope():
+def test_collect_sandbox_returns_envelope():
     code, env = run("collect", "--root", str(SANDBOX))
     assert code == 0
     assert env["schema_version"] == 1 and env["ok"] is True
     assert env["project"]["settings_module"] == "config.settings"
     assert env["project"]["root"] == str(SANDBOX)
     assert env["project"]["django_version"]
-    assert env["data"] == {k: [] for k in ("apps", "models", "endpoints", "url_names", "commands")}
+    assert set(env["data"]) == {"apps", "models", "endpoints", "url_names", "commands"}
     assert env["warnings"] == []
 
 

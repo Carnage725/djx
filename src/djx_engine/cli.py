@@ -9,7 +9,7 @@ import traceback
 from datetime import UTC, datetime
 from typing import Any
 
-from djx_engine import bootstrap, collectors
+from djx_engine import bootstrap, collectors, diagnostics
 from djx_engine.contract import SCHEMA_VERSION, error_envelope
 
 
@@ -41,13 +41,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 def _collect(project: dict[str, Any]) -> dict[str, Any]:
     data: dict[str, Any] = {}
-    warnings: list[dict[str, str]] = []
+    diagnostics.reset()
     for key, collector in collectors.COLLECTORS:
         try:
             data[key] = collector()
         except Exception as exc:  # noqa: BLE001 - one bad collector must not kill the rest
             data[key] = []
-            warnings.append({"collector": key, "message": f"{type(exc).__name__}: {exc}"})
+            diagnostics.warn(key, f"{type(exc).__name__}: {exc}")
             traceback.print_exc()
     return {
         "schema_version": SCHEMA_VERSION,
@@ -55,7 +55,7 @@ def _collect(project: dict[str, Any]) -> dict[str, Any]:
         "generated_at": datetime.now(UTC).isoformat(),
         "project": project,
         "data": data,
-        "warnings": warnings,
+        "warnings": diagnostics.WARNINGS,
     }
 
 

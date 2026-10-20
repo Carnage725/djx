@@ -33,7 +33,57 @@ Settings module: `--settings` > `DJANGO_SETTINGS_MODULE` env > `os.environ.setde
 }
 ```
 
-`ninja_version` is `null` when django-ninja is not installed. A failing collector yields `[]` plus one warning; the others still run. Collector item shapes are added here as each collector lands.
+`ninja_version` is `null` when django-ninja is not installed. A failing collector yields `[]` plus one warning; the others still run. Collectors that are not implemented yet (`endpoints`, `url_names`) return `[]`.
+
+## `data.apps[]`
+
+```json
+{ "label": "shop", "name": "shop", "verbose_name": "Shop", "path": "/abs/shop",
+  "origin": "local", "model_count": 6, "command_count": 2 }
+```
+
+`origin`: `"django"` if the app name starts with `django.`; `"local"` if its path is under the project root and not in `site-packages`; else `"third_party"`. Order follows `INSTALLED_APPS`.
+
+## `data.models[]`
+
+Sorted by `label`. Abstract models are absent. Never touches the database.
+
+```json
+{
+  "label": "shop.Product", "app": "shop", "name": "Product", "db_table": "shop_product",
+  "verbose_name": "product", "pk": "id", "ordering": [], "proxy": false, "proxy_for": null,
+  "origin": "local",
+  "fields": [{
+    "name": "category", "column": "category_id", "type": "ForeignKey",
+    "null": false, "blank": false, "unique": false, "primary_key": false,
+    "max_length": null, "has_choices": false, "default": null, "help_text": "",
+    "relation": { "kind": "fk", "to": "shop.Category", "on_delete": "CASCADE",
+                  "related_name": "products", "through": null }
+  }],
+  "reverse_relations": [{ "name": "items", "kind": "fk", "from": "shop.OrderItem", "field": "order" }],
+  "source": { "file": "/abs/shop/models.py", "line": 12 }
+}
+```
+
+- `fields` includes m2m fields (`column` is `null`). Proxy models list the concrete model's fields.
+- `relation` is `null` for non-relation fields. `kind` is `fk`, `o2o` or `m2m`. `on_delete` is `null` for m2m. `related_name` is the declared value (`null` if not declared). `through` is set only for an explicit through model, `null` for auto-created ones.
+- `default` is `null` for no default, `"<qualified name>"` for callables (never called), else `repr(default)` cut to 200 chars.
+- `reverse_relations` skips relations hidden with `related_name="+"`. `name` is the accessor name.
+
+## `data.commands[]`
+
+Local commands first, then third-party, then Django built-ins; each group sorted by name.
+
+```json
+{ "name": "seed_shop", "app": "shop", "origin": "local", "help": "...",
+  "source": { "file": "/abs/shop/management/commands/seed_shop.py", "line": 9 } }
+```
+
+`app` is the app label, or the raw module name (`django.core`) for commands not owned by an installed app. `source` points at the `Command` class. If a command fails to load it is kept with `help: ""` and a warning.
+
+## `source_of` rules
+
+Unwraps `functools.partial`, Django `view_class`, `__wrapped__` and bound methods before looking up the file and line. Returns `{"file": null, "line": null}` instead of raising.
 
 ## Error envelope (exit code 2)
 

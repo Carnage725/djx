@@ -15,6 +15,10 @@ SETTINGS_RE = re.compile(
 )
 
 
+# Set by setup(); used to tell local code from third-party code.
+PROJECT_ROOT: Path | None = None
+
+
 class EngineError(Exception):
     def __init__(self, type_: str, message: str, hint: str):
         super().__init__(message)
@@ -51,10 +55,12 @@ def _ninja_version() -> str | None:
 
 
 def setup(root_arg: str, settings_override: str | None) -> Project:
+    global PROJECT_ROOT
     root = Path(root_arg).expanduser().resolve()
     if not root.is_dir():
         raise EngineError("ProjectNotFound", f"Not a directory: {root}", "Check the --root path.")
 
+    PROJECT_ROOT = root
     os.chdir(root)
     if str(root) not in sys.path:
         sys.path.insert(0, str(root))
