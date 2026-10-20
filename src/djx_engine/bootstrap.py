@@ -27,24 +27,28 @@ class EngineError(Exception):
         self.hint = hint
 
 
-def detect_settings_module(root: Path, override: str | None) -> str:
-    """--settings flag > DJANGO_SETTINGS_MODULE env > manage.py (the only text parsing allowed)."""
+def detect_settings_source(root: Path, override: str | None) -> tuple[str, str]:
+    """(module, how it was found). --settings flag > env > manage.py (the only text parsing)."""
     if override:
-        return override
+        return override, "--settings flag"
     env = os.environ.get("DJANGO_SETTINGS_MODULE")
     if env:
-        return env
+        return env, "DJANGO_SETTINGS_MODULE environment variable"
     manage = root / "manage.py"
     if manage.is_file():
         match = SETTINGS_RE.search(manage.read_text(encoding="utf-8", errors="replace"))
         if match:
-            return match.group(1)
+            return match.group(1), "manage.py"
     raise EngineError(
         "SettingsNotFound",
         "Could not determine DJANGO_SETTINGS_MODULE.",
         "Pass --settings MODULE, set DJANGO_SETTINGS_MODULE, or make manage.py call "
         "os.environ.setdefault('DJANGO_SETTINGS_MODULE', '...').",
     )
+
+
+def detect_settings_module(root: Path, override: str | None) -> str:
+    return detect_settings_source(root, override)[0]
 
 
 def _ninja_version() -> str | None:

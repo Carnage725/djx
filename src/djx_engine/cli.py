@@ -7,10 +7,10 @@ import json
 import sys
 import time
 import traceback
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 
-from djx_engine import bootstrap, collectors, diagnostics, lookup
+from djx_engine import bootstrap, diagnostics
 from djx_engine.contract import SCHEMA_VERSION, error_envelope
 
 
@@ -41,6 +41,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _collect(project: dict[str, Any]) -> dict[str, Any]:
+    from djx_engine import collectors  # needs Django, so only after bootstrap
+
     data: dict[str, Any] = {}
     diagnostics.reset()
     for key, collector in collectors.COLLECTORS:
@@ -53,7 +55,7 @@ def _collect(project: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": SCHEMA_VERSION,
         "ok": True,
-        "generated_at": datetime.now(UTC).isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),  # noqa: UP017 - datetime.UTC needs Python 3.11
         "project": project,
         "data": data,
         "warnings": diagnostics.WARNINGS,
@@ -62,6 +64,8 @@ def _collect(project: dict[str, Any]) -> dict[str, Any]:
 
 def _run(args: argparse.Namespace) -> dict[str, Any]:
     project = bootstrap.setup(args.root, args.settings)
+    from djx_engine import lookup  # needs Django, so only after bootstrap
+
     if args.command == "collect":
         return _collect(project)
     if args.command == "reverse":

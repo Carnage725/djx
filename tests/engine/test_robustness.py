@@ -90,3 +90,11 @@ def test_project_without_ninja(tmp_path):
     assert hello["kind"] == "django"
     assert hello["view"] == "plain_urls.hello"
     assert hello["origin"] == "local"
+
+
+def test_python_without_django_gives_json_error_and_hint():
+    proc = run_with_driver('sys.modules["django"] = None', "collect", "--root", str(SANDBOX))
+    assert proc.returncode == 2
+    env = json.loads(proc.stdout)
+    assert env["ok"] is False
+    assert "Django is not importable" in env["error"]["hint"]

@@ -30,32 +30,43 @@ def error_envelope(type_: str, message: str, hint: str, traceback: str = "") -> 
     return Envelope(ok=False, error=error)
 
 
-def find_python(root: Path | str, override: str | None = None) -> str:
-    """--python flag > DJX_PYTHON env > <root>/.venv > $VIRTUAL_ENV > this interpreter."""
+def find_python_with_source(root: Path | str, override: str | None = None) -> tuple[str, str]:
+    """(python, how it was chosen).
+
+    --python flag > DJX_PYTHON env > .venv in the project root or a parent folder
+    > $VIRTUAL_ENV > the Python djx itself runs on.
+    """
     if override:
-        return override
+        return override, "--python flag"
     env = os.environ.get("DJX_PYTHON")
     if env:
-        return env
+        return env, "DJX_PYTHON environment variable"
     bin_dir, exe = ("Scripts", "python.exe") if sys.platform == "win32" else ("bin", "python")
-    candidate = Path(root) / ".venv" / bin_dir / exe
-    if candidate.exists():
-        return str(candidate)
+    start = Path(root).resolve()
+    for folder in [start, *start.parents]:
+        candidate = folder / ".venv" / bin_dir / exe
+        if candidate.exists():
+            return str(candidate), f".venv in {folder}"
     virtual_env = os.environ.get("VIRTUAL_ENV")
     if virtual_env:
         candidate = Path(virtual_env) / bin_dir / exe
         if candidate.exists():
-            return str(candidate)
-    return sys.executable
+            return str(candidate), "$VIRTUAL_ENV"
+    return sys.executable, "djx's own Python (no virtualenv found)"
+
+
+def find_python(root: Path | str, override: str | None = None) -> str:
+    return find_python_with_source(root, override)[0]
 
 
 def _tail(text: str) -> str:
     return "\n".join(text.strip().splitlines()[-STDERR_TAIL_LINES:])
 
 
-def _run(python: str, argv: list[str]) -> Envelope:
+def exec_engine(python: str, argv: list[str]) -> subprocess.CompletedProcess[str] | Envelope:
+    """Run the engine. Returns the finished process, or an error Envelope if it could not run."""
     try:
-        proc = subprocess.run(
+        return subprocess.run(
             run_cmd(python, argv),
             check=False,
             capture_output=True,
@@ -76,15 +87,31 @@ def _run(python: str, argv: list[str]) -> Envelope:
             f"Could not run {python}: {exc}",
             "Check --python or DJX_PYTHON.",
         )
+
+
+def error_document(error: dict[str, str]) -> dict[str, Any]:
+    return {"schema_version": 1, "ok": False, "error": error}
+
+
+def run_json(python: str, argv: list[str]) -> dict[str, Any]:
+    """Run the engine and return its JSON document. Failures become an error document."""
+    proc = exec_engine(python, argv)
+    if isinstance(proc, Envelope):
+        return error_document(proc.error)
     try:
-        raw = json.loads(proc.stdout)
+        return json.loads(proc.stdout)
     except json.JSONDecodeError:
-        return error_envelope(
-            "EngineOutputError",
-            f"The engine exited with code {proc.returncode} and printed no valid JSON.",
-            "Is Django installed in this Python? Try --python or DJX_PYTHON.",
-            _tail(proc.stderr) or proc.stdout[:500],
-        )
+        error = {
+            "type": "EngineOutputError",
+            "message": f"The engine exited with code {proc.returncode} and printed no valid JSON.",
+            "hint": "Is Django installed in this Python? Try --python or DJX_PYTHON.",
+            "traceback": _tail(proc.stderr) or proc.stdout[:500],
+        }
+        return error_document(error)
+
+
+def _run(python: str, argv: list[str]) -> Envelope:
+    raw = run_json(python, argv)
     if not raw.get("ok"):
         error = raw.get("error", {})
         return error_envelope(
@@ -101,7 +128,7 @@ def _run(python: str, argv: list[str]) -> Envelope:
     )
 
 
-def _base_args(command: str, root: Path | str, settings: str | None) -> list[str]:
+def base_args(command: str, root: Path | str, settings: str | None) -> list[str]:
     argv = [command, "--root", str(Path(root).resolve())]
     if settings:
         argv += ["--settings", settings]
@@ -109,7 +136,7 @@ def _base_args(command: str, root: Path | str, settings: str | None) -> list[str
 
 
 def collect(root: Path | str, python: str, settings: str | None = None) -> Envelope:
-    return _run(python, _base_args("collect", root, settings))
+    return _run(python, base_args("collect", root, settings))
 
 
 def reverse(
@@ -120,7 +147,7 @@ def reverse(
     kwargs: dict[str, str] | None = None,
     settings: str | None = None,
 ) -> Envelope:
-    argv = _base_args("reverse", root, settings) + ["--name", name]
+    argv = base_args("reverse", root, settings) + ["--name", name]
     for value in args or []:
         argv += ["--arg", value]
     for key, value in (kwargs or {}).items():
@@ -131,7 +158,7 @@ def reverse(
 def resolve(
     root: Path | str, python: str, path: str, settings: str | None = None
 ) -> Envelope:
-    return _run(python, _base_args("resolve", root, settings) + ["--path", path])
+    return _run(python, base_args("resolve", root, settings) + ["--path", path])
 
 
 class EngineClient:

@@ -134,6 +134,12 @@ Every named pattern, namespaced names included (Ninja operations too). Sorted by
 
 Unwraps `functools.partial`, Django `view_class`, `__wrapped__` and bound methods before looking up the file and line. Returns `{"file": null, "line": null}` instead of raising.
 
+### Warnings the engine itself produces
+
+- `commands`: `Could not load command <name>: <error>`
+- `endpoints` / `url_names`: `Could not load urls for '<route>': <error>` (one broken `include()` is skipped)
+- `endpoints`, Ninja checks: `Ninja <version>: found X operations, OpenAPI says Y for <api title> <version>` and `Ninja <version> detected but its internals were not recognised; Ninja routes are shown as plain Django endpoints.`
+
 ## Error envelope (exit code 2)
 
 ```json

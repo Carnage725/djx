@@ -1,0 +1,10 @@
+[
+  {
+    "label": "djx (sandbox)",
+    "command": "uv",
+    "args": ["run", "djx", "sandbox"],
+    "use_new_terminal": true,
+    "allow_concurrent_runs": true,
+    "reveal": "always"
+  }
+]

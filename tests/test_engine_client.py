@@ -9,19 +9,25 @@ SANDBOX = Path(__file__).resolve().parents[1] / "sandbox"
 def test_find_python_precedence(tmp_path, monkeypatch):
     monkeypatch.delenv("DJX_PYTHON", raising=False)
     monkeypatch.delenv("VIRTUAL_ENV", raising=False)
-    assert find_python(tmp_path) == sys.executable
-    venv_python = tmp_path / ".venv" / "bin" / "python"
-    venv_python.parent.mkdir(parents=True)
-    venv_python.touch()
-    assert find_python(tmp_path) == str(venv_python)
+    bare = tmp_path / "bare"
+    bare.mkdir()
+    assert find_python(bare) == sys.executable
+
     other_venv = tmp_path / "other"
     (other_venv / "bin").mkdir(parents=True)
     (other_venv / "bin" / "python").touch()
     monkeypatch.setenv("VIRTUAL_ENV", str(other_venv))
-    assert find_python(tmp_path / "empty") == str(other_venv / "bin" / "python")
+    assert find_python(bare) == str(other_venv / "bin" / "python")
+
+    project = tmp_path / "project"
+    venv_python = project / ".venv" / "bin" / "python"
+    venv_python.parent.mkdir(parents=True)
+    venv_python.touch()
+    assert find_python(project) == str(venv_python)  # .venv beats $VIRTUAL_ENV
+
     monkeypatch.setenv("DJX_PYTHON", "/env/python")
-    assert find_python(tmp_path) == "/env/python"
-    assert find_python(tmp_path, "/flag/python") == "/flag/python"
+    assert find_python(project) == "/env/python"
+    assert find_python(project, "/flag/python") == "/flag/python"
 
 
 def test_collect_sandbox():
