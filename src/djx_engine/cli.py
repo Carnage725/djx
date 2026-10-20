@@ -9,7 +9,7 @@ import traceback
 from datetime import UTC, datetime
 from typing import Any
 
-from djx_engine import bootstrap, collectors, diagnostics
+from djx_engine import bootstrap, collectors, diagnostics, lookup
 from djx_engine.contract import SCHEMA_VERSION, error_envelope
 
 
@@ -59,17 +59,13 @@ def _collect(project: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _not_implemented(command: str) -> dict[str, Any]:
-    return error_envelope(
-        "NotImplemented", f"{command} is not implemented yet.", "Coming in a later step.", ""
-    )
-
-
 def _run(args: argparse.Namespace) -> dict[str, Any]:
     project = bootstrap.setup(args.root, args.settings)
     if args.command == "collect":
         return _collect(project)
-    return _not_implemented(args.command)
+    if args.command == "reverse":
+        return lookup.reverse_url(args.name, args.arg, args.kwarg)
+    return lookup.resolve_path(args.path)
 
 
 def main(argv: list[str] | None = None) -> int:

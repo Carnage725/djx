@@ -1,3 +1,8 @@
+import json
+
+from conftest import SANDBOX, run_engine_raw
+
+
 def field(model, name):
     return next(f for f in model["fields"] if f["name"] == name)
 
@@ -88,6 +93,9 @@ def test_commands(data):
     assert origins == sorted(origins, key={"local": 0, "third_party": 1, "django": 2}.get)
 
 
-def test_engine_stdout_is_clean_json(collected):
-    # The fixture already json.loads the whole stdout; any stray print would have failed it.
-    assert collected["ok"] is True
+def test_import_time_print_goes_to_stderr():
+    # Loading the URL conf imports blog.views, which print()s at import time.
+    proc = run_engine_raw("collect", "--root", str(SANDBOX))
+    assert "blog.views imported" in proc.stderr
+    assert "blog.views imported" not in proc.stdout
+    assert json.loads(proc.stdout)["ok"] is True

@@ -16,6 +16,11 @@ def run_engine(*argv):
     return proc.returncode, proc.stdout, json.loads(proc.stdout)
 
 
+def run_engine_raw(*argv):
+    proc = subprocess.run(run_cmd(sys.executable, list(argv)), check=False, capture_output=True, text=True)
+    return proc
+
+
 @pytest.fixture(scope="session")
 def collected():
     """One `collect` run against sandbox/, shared by all engine tests."""

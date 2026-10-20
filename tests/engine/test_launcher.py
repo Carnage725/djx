@@ -37,8 +37,3 @@ def test_broken_settings_gives_error_envelope():
 def test_missing_root_gives_error_envelope(tmp_path):
     code, env = run("collect", "--root", str(tmp_path / "nope"))
     assert code == 2 and env["error"]["type"] == "ProjectNotFound"
-
-
-def test_reverse_stub_is_error_envelope():
-    code, env = run("reverse", "--root", str(SANDBOX), "--name", "home")
-    assert code == 2 and env["ok"] is False
