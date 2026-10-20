@@ -98,6 +98,7 @@ Sorted by `kind`, `path`, first method.
   "api": { "title": "Shop API", "version": "1.0.0", "namespace": "api-v1" },
   "is_async": false,
   "signature": "(request, product_id: int)",
+  "origin": "local",
   "source": { "file": "/abs/shop/api/products.py", "line": 18 }
 }
 ```
@@ -108,6 +109,7 @@ Sorted by `kind`, `path`, first method.
 - `url_name` includes namespaces (`blog:post-detail`).
 - `summary`: Ninja summary if set explicitly, else the first line of the view's own docstring (never inherited), else `""`.
 - `api` is `null` for Django views. Django-ninja's own docs/openapi URLs are listed as `django` endpoints.
+- `origin` (also on `url_names[]`) comes from the real, unwrapped view: module `django.*` -> `"django"`; module `ninja.*` or a file inside `site-packages` -> `"third_party"`; a file under the project root -> `"local"`; anything else -> `"third_party"`. Ninja operations are judged by their own function, so operations written in the project are `"local"` while Ninja's docs/openapi URLs are `"third_party"`.
 - Class-based views: `view` and `source` point at the class.
 - Ninja: django-ninja 1.7 gives Django a closure that captures its `PathView`, and creates one URL pattern per operation. The engine finds the `PathView` in the closure (bound methods are also supported) and maps the Nth pattern of a `PathView` to its Nth operation.
 
@@ -117,11 +119,12 @@ Every named pattern, namespaced names included (Ninja operations too). Sorted by
 
 ```json
 { "name": "blog:post-detail", "namespace": "blog", "route": "/blog/<slug:slug>/",
-  "args": ["slug"], "view": "blog.views.PostDetailView",
+  "args": ["slug"], "unnamed_groups": 0, "view": "blog.views.PostDetailView",
+  "origin": "local",
   "source": { "file": "/abs/blog/views.py", "line": 14 } }
 ```
 
-`namespace` is `null` without one. `args` are the group names of every level, outermost first. For regex routes `route` is the concatenated regex without anchors.
+`unnamed_groups` counts unnamed regex groups over all levels (`0` for route patterns); a reverse form cannot fill those, use `resolve`. `namespace` is `null` without one. `args` are the group names of every level, outermost first. For regex routes `route` is the concatenated regex (not a Django route string) with the `^` and `$` anchors removed, so `args` and `unnamed_groups` describe it.
 
 ## `reverse` and `resolve` output
 

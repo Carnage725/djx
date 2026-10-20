@@ -41,14 +41,36 @@ def source_of(obj: Any) -> Source:
         return {"file": None, "line": None}
 
 
+def _is_local(path: str | None) -> bool:
+    """Under the project root and not inside a virtualenv's site-packages."""
+    root = bootstrap.PROJECT_ROOT
+    if root is None or not path:
+        return False
+    resolved = Path(path).resolve()
+    in_site_packages = any(p in ("site-packages", "dist-packages") for p in resolved.parts)
+    return resolved.is_relative_to(root) and not in_site_packages
+
+
 def app_origin(name: str, path: str | None) -> str:
     """'django' for django.*, 'local' for code under the project root, else 'third_party'."""
     if name.startswith("django."):
         return "django"
-    root = bootstrap.PROJECT_ROOT
-    if root is not None and path:
-        resolved = Path(path).resolve()
-        in_site_packages = any(p in ("site-packages", "dist-packages") for p in resolved.parts)
-        if resolved.is_relative_to(root) and not in_site_packages:
-            return "local"
-    return "third_party"
+    return "local" if _is_local(path) else "third_party"
+
+
+def view_origin(view: Any) -> str:
+    """Origin of the real (unwrapped) view, from its module and source file."""
+    target = unwrap(view)
+    module = getattr(target, "__module__", None) or ""
+    file = source_of(target)["file"]
+    if module == "django" or module.startswith("django."):
+        return "django"
+    if module == "ninja" or module.startswith("ninja.") or _in_site_packages(file):
+        return "third_party"
+    return "local" if _is_local(file) else "third_party"
+
+
+def _in_site_packages(file: str | None) -> bool:
+    return bool(file) and any(
+        p in ("site-packages", "dist-packages") for p in Path(file).resolve().parts
+    )

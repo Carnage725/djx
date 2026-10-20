@@ -3,7 +3,7 @@ from __future__ import annotations
 import inspect
 from typing import Any
 
-from djx_engine.sources import source_of, unwrap
+from djx_engine.sources import source_of, unwrap, view_origin
 from djx_engine.urlwalk import Entry, display_path, dotted, first_doc_line, walk
 
 
@@ -59,6 +59,7 @@ def _ninja_endpoints(entry: Entry, path: str) -> list[dict[str, Any]]:
             "api": api_info,
             "is_async": bool(operation.is_async),
             "signature": _signature(func),
+            "origin": view_origin(func),
             "source": source_of(func),
         }
         for method in operation.methods
@@ -83,6 +84,7 @@ def _django_endpoint(entry: Entry, path: str) -> dict[str, Any]:
         "api": None,
         "is_async": inspect.iscoroutinefunction(callback) or inspect.iscoroutinefunction(target),
         "signature": "" if is_class else _signature(callback),
+        "origin": view_origin(callback),
         "source": source_of(callback),
     }
 

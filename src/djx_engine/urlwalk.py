@@ -19,6 +19,7 @@ class Entry:
     name: str | None  # full name including namespaces, e.g. "blog:post-detail"
     namespace: str | None
     args: list[str]
+    unnamed_groups: int
     operation: Any = None  # ninja Operation when the pattern belongs to Ninja
     extra: dict[str, Any] = field(default_factory=dict)
 
@@ -59,6 +60,14 @@ def _group_names(pattern: Any) -> list[str]:
     return [name for name, _ in sorted(groups.items(), key=lambda item: item[1])]
 
 
+def _unnamed_group_count(pattern: Any) -> int:
+    try:
+        regex = pattern.regex
+        return regex.groups - len(regex.groupindex)
+    except Exception:  # noqa: BLE001 - exotic pattern classes
+        return 0
+
+
 def _piece(pattern: Any) -> str:
     text = str(pattern)
     if type(pattern).__name__ == "RegexPattern":
@@ -72,10 +81,13 @@ def walk(collector: str) -> Iterator[Entry]:
     path_view_class = _path_view_class()
     counters: dict[int, int] = {}
 
-    def visit(patterns: Any, prefix: str, namespaces: list[str], args: list[str]) -> Iterator[Entry]:
+    def visit(
+        patterns: Any, prefix: str, namespaces: list[str], args: list[str], unnamed: int
+    ) -> Iterator[Entry]:
         for p in patterns:
             route = prefix + _piece(p.pattern)
             p_args = args + _group_names(p.pattern)
+            p_unnamed = unnamed + _unnamed_group_count(p.pattern)
             if isinstance(p, URLResolver):
                 inner = namespaces + [p.namespace] if p.namespace else namespaces
                 try:
@@ -83,7 +95,7 @@ def walk(collector: str) -> Iterator[Entry]:
                 except Exception as exc:  # noqa: BLE001 - skip one broken include, keep going
                     diagnostics.warn(collector, f"Could not load urls for {route!r}: {exc}")
                     continue
-                yield from visit(children, route, inner, p_args)
+                yield from visit(children, route, inner, p_args, p_unnamed)
                 continue
             name = ":".join([*namespaces, p.name]) if p.name else None
             operation = None
@@ -101,10 +113,11 @@ def walk(collector: str) -> Iterator[Entry]:
                 name=name,
                 namespace=":".join(namespaces) or None,
                 args=p_args,
+                unnamed_groups=p_unnamed,
                 operation=operation,
             )
 
-    for entry in visit(get_resolver().url_patterns, "", [], []):
+    for entry in visit(get_resolver().url_patterns, "", [], [], 0):
         entry.route = "/" + entry.route.lstrip("/")
         yield entry
 

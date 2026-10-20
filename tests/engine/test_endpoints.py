@@ -135,3 +135,36 @@ def test_resolve_django_view():
 def test_resolve_unknown_path():
     code, _, env = run_engine("resolve", "--root", str(SANDBOX), "--path", "/nope/nope/")
     assert code == 2 and env["error"]["type"] == "Resolver404"
+
+
+def test_origin_on_endpoints(endpoints):
+    assert all(e["origin"] in ("local", "django", "third_party") for e in endpoints)
+    admin = [e for e in endpoints if e["path"].startswith("/admin/")]
+    assert admin and {e["origin"] for e in admin} == {"django"}
+    (docs,) = find(endpoints, None, "/api/v1/docs")
+    assert docs["origin"] == "third_party"
+    ninja = [e for e in endpoints if e["kind"] == "ninja"]
+    assert {e["origin"] for e in ninja} == {"local"}
+    for url_name in ("home", "blog:post-detail", "blog:archive", "legacy-detail", "shop:cart"):
+        (endpoint,) = [e for e in endpoints if e["url_name"] == url_name]
+        assert endpoint["origin"] == "local", url_name
+
+
+def test_origin_and_unnamed_groups_on_url_names(data):
+    by_name = {u["name"]: u for u in data["url_names"]}
+    assert by_name["blog:post-detail"]["origin"] == "local"
+    assert by_name["api-v1:get_product"]["origin"] == "local"
+    assert by_name["api-v1:openapi-view"]["origin"] == "third_party"
+    assert all(u["unnamed_groups"] == 0 for u in data["url_names"] if u["origin"] == "local")
+    assert all(isinstance(u["unnamed_groups"], int) for u in data["url_names"])
+    admin = [u for u in data["url_names"] if u["name"].startswith("admin:")]
+    assert admin and {u["origin"] for u in admin} == {"django"}
+
+
+def test_unnamed_group_count():
+    from django.urls.resolvers import RegexPattern, RoutePattern
+
+    from djx_engine.urlwalk import _unnamed_group_count
+
+    assert _unnamed_group_count(RegexPattern(r"^a/(\d+)/(?P<x>\w+)/([a-z]+)/$")) == 2
+    assert _unnamed_group_count(RoutePattern("a/<int:x>/")) == 0
