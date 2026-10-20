@@ -1,0 +1,5917 @@
+{
+  "schema_version": 1,
+  "ok": true,
+  "generated_at": "1970-01-01T00:00:00+00:00",
+  "project": {
+    "root": "/repo/sandbox",
+    "settings_module": "config.settings",
+    "python": "/repo/.venv/bin/python",
+    "django_version": "6.1.2",
+    "ninja_version": "1.7.1"
+  },
+  "data": {
+    "apps": [
+      {
+        "label": "admin",
+        "name": "django.contrib.admin",
+        "verbose_name": "Administration",
+        "path": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin",
+        "origin": "django",
+        "model_count": 1,
+        "command_count": 0
+      },
+      {
+        "label": "auth",
+        "name": "django.contrib.auth",
+        "verbose_name": "Authentication and Authorization",
+        "path": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth",
+        "origin": "django",
+        "model_count": 3,
+        "command_count": 2
+      },
+      {
+        "label": "contenttypes",
+        "name": "django.contrib.contenttypes",
+        "verbose_name": "Content Types",
+        "path": "/repo/.venv/lib/python3.14/site-packages/django/contrib/contenttypes",
+        "origin": "django",
+        "model_count": 1,
+        "command_count": 1
+      },
+      {
+        "label": "sessions",
+        "name": "django.contrib.sessions",
+        "verbose_name": "Sessions",
+        "path": "/repo/.venv/lib/python3.14/site-packages/django/contrib/sessions",
+        "origin": "django",
+        "model_count": 1,
+        "command_count": 1
+      },
+      {
+        "label": "messages",
+        "name": "django.contrib.messages",
+        "verbose_name": "Messages",
+        "path": "/repo/.venv/lib/python3.14/site-packages/django/contrib/messages",
+        "origin": "django",
+        "model_count": 0,
+        "command_count": 0
+      },
+      {
+        "label": "staticfiles",
+        "name": "django.contrib.staticfiles",
+        "verbose_name": "Static Files",
+        "path": "/repo/.venv/lib/python3.14/site-packages/django/contrib/staticfiles",
+        "origin": "django",
+        "model_count": 0,
+        "command_count": 3
+      },
+      {
+        "label": "ninja",
+        "name": "ninja",
+        "verbose_name": "Ninja",
+        "path": "/repo/.venv/lib/python3.14/site-packages/ninja",
+        "origin": "third_party",
+        "model_count": 0,
+        "command_count": 1
+      },
+      {
+        "label": "core",
+        "name": "core",
+        "verbose_name": "Core",
+        "path": "/repo/sandbox/core",
+        "origin": "local",
+        "model_count": 0,
+        "command_count": 0
+      },
+      {
+        "label": "shop",
+        "name": "shop",
+        "verbose_name": "Shop",
+        "path": "/repo/sandbox/shop",
+        "origin": "local",
+        "model_count": 6,
+        "command_count": 2
+      },
+      {
+        "label": "blog",
+        "name": "blog",
+        "verbose_name": "Blog",
+        "path": "/repo/sandbox/blog",
+        "origin": "local",
+        "model_count": 4,
+        "command_count": 1
+      }
+    ],
+    "models": [
+      {
+        "label": "admin.LogEntry",
+        "app": "admin",
+        "name": "LogEntry",
+        "db_table": "django_admin_log",
+        "verbose_name": "log entry",
+        "pk": "id",
+        "ordering": [
+          "-action_time"
+        ],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "django",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "AutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "action_time",
+            "column": "action_time",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "<now>",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "user",
+            "column": "user_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "auth.User",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "content_type",
+            "column": "content_type_id",
+            "type": "ForeignKey",
+            "null": true,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "contenttypes.ContentType",
+              "on_delete": "SET_NULL",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "object_id",
+            "column": "object_id",
+            "type": "TextField",
+            "null": true,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "object_repr",
+            "column": "object_repr",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 200,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "action_flag",
+            "column": "action_flag",
+            "type": "PositiveSmallIntegerField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": true,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "change_message",
+            "column": "change_message",
+            "type": "TextField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [],
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/models.py",
+          "line": 57
+        }
+      },
+      {
+        "label": "auth.Group",
+        "app": "auth",
+        "name": "Group",
+        "db_table": "auth_group",
+        "verbose_name": "group",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "django",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "AutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "name",
+            "column": "name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 150,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "permissions",
+            "column": null,
+            "type": "ManyToManyField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "m2m",
+              "to": "auth.Permission",
+              "on_delete": null,
+              "related_name": null,
+              "through": null
+            }
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "user_set",
+            "kind": "m2m",
+            "from": "auth.User",
+            "field": "groups"
+          }
+        ],
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/models.py",
+          "line": 107
+        }
+      },
+      {
+        "label": "auth.Permission",
+        "app": "auth",
+        "name": "Permission",
+        "db_table": "auth_permission",
+        "verbose_name": "permission",
+        "pk": "id",
+        "ordering": [
+          "content_type__app_label",
+          "content_type__model",
+          "codename"
+        ],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "django",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "AutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "name",
+            "column": "name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 255,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "content_type",
+            "column": "content_type_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "contenttypes.ContentType",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "codename",
+            "column": "codename",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 100,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "group_set",
+            "kind": "m2m",
+            "from": "auth.Group",
+            "field": "permissions"
+          },
+          {
+            "name": "user_set",
+            "kind": "m2m",
+            "from": "auth.User",
+            "field": "user_permissions"
+          }
+        ],
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/models.py",
+          "line": 39
+        }
+      },
+      {
+        "label": "auth.User",
+        "app": "auth",
+        "name": "User",
+        "db_table": "auth_user",
+        "verbose_name": "user",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "django",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "AutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "password",
+            "column": "password",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 128,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "last_login",
+            "column": "last_login",
+            "type": "DateTimeField",
+            "null": true,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "is_superuser",
+            "column": "is_superuser",
+            "type": "BooleanField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "False",
+            "help_text": "Designates that this user has all permissions without explicitly assigning them.",
+            "relation": null
+          },
+          {
+            "name": "username",
+            "column": "username",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 150,
+            "has_choices": false,
+            "default": null,
+            "help_text": "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+            "relation": null
+          },
+          {
+            "name": "first_name",
+            "column": "first_name",
+            "type": "CharField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 150,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "last_name",
+            "column": "last_name",
+            "type": "CharField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 150,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "email",
+            "column": "email",
+            "type": "EmailField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 254,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "is_staff",
+            "column": "is_staff",
+            "type": "BooleanField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "False",
+            "help_text": "Designates whether the user can log into this admin site.",
+            "relation": null
+          },
+          {
+            "name": "is_active",
+            "column": "is_active",
+            "type": "BooleanField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "True",
+            "help_text": "Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+            "relation": null
+          },
+          {
+            "name": "date_joined",
+            "column": "date_joined",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "<now>",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "groups",
+            "column": null,
+            "type": "ManyToManyField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+            "relation": {
+              "kind": "m2m",
+              "to": "auth.Group",
+              "on_delete": null,
+              "related_name": "user_set",
+              "through": null
+            }
+          },
+          {
+            "name": "user_permissions",
+            "column": null,
+            "type": "ManyToManyField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "Specific permissions for this user.",
+            "relation": {
+              "kind": "m2m",
+              "to": "auth.Permission",
+              "on_delete": null,
+              "related_name": "user_set",
+              "through": null
+            }
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "logentry_set",
+            "kind": "fk",
+            "from": "admin.LogEntry",
+            "field": "user"
+          },
+          {
+            "name": "author",
+            "kind": "o2o",
+            "from": "blog.Author",
+            "field": "user"
+          },
+          {
+            "name": "customer",
+            "kind": "o2o",
+            "from": "shop.Customer",
+            "field": "user"
+          }
+        ],
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/models.py",
+          "line": 522
+        }
+      },
+      {
+        "label": "blog.Author",
+        "app": "blog",
+        "name": "Author",
+        "db_table": "blog_author",
+        "verbose_name": "author",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "user",
+            "column": "user_id",
+            "type": "OneToOneField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "o2o",
+              "to": "auth.User",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "bio",
+            "column": "bio",
+            "type": "TextField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "post_set",
+            "kind": "fk",
+            "from": "blog.Post",
+            "field": "author"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/blog/models.py",
+          "line": 5
+        }
+      },
+      {
+        "label": "blog.Comment",
+        "app": "blog",
+        "name": "Comment",
+        "db_table": "blog_comment",
+        "verbose_name": "comment",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "post",
+            "column": "post_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "blog.Post",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "author_name",
+            "column": "author_name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 100,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "body",
+            "column": "body",
+            "type": "TextField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [],
+        "source": {
+          "file": "/repo/sandbox/blog/models.py",
+          "line": 32
+        }
+      },
+      {
+        "label": "blog.Post",
+        "app": "blog",
+        "name": "Post",
+        "db_table": "blog_post",
+        "verbose_name": "post",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "author",
+            "column": "author_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "blog.Author",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "title",
+            "column": "title",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 200,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "slug",
+            "column": "slug",
+            "type": "SlugField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 50,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "body",
+            "column": "body",
+            "type": "TextField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "published_at",
+            "column": "published_at",
+            "type": "DateTimeField",
+            "null": true,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "tags",
+            "column": null,
+            "type": "ManyToManyField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "m2m",
+              "to": "blog.Tag",
+              "on_delete": null,
+              "related_name": null,
+              "through": null
+            }
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "comment_set",
+            "kind": "fk",
+            "from": "blog.Comment",
+            "field": "post"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/blog/models.py",
+          "line": 20
+        }
+      },
+      {
+        "label": "blog.Tag",
+        "app": "blog",
+        "name": "Tag",
+        "db_table": "blog_tag",
+        "verbose_name": "tag",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "name",
+            "column": "name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 50,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "post_set",
+            "kind": "m2m",
+            "from": "blog.Post",
+            "field": "tags"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/blog/models.py",
+          "line": 13
+        }
+      },
+      {
+        "label": "contenttypes.ContentType",
+        "app": "contenttypes",
+        "name": "ContentType",
+        "db_table": "django_content_type",
+        "verbose_name": "content type",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "django",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "AutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "app_label",
+            "column": "app_label",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 100,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "model",
+            "column": "model",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 100,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "logentry_set",
+            "kind": "fk",
+            "from": "admin.LogEntry",
+            "field": "content_type"
+          },
+          {
+            "name": "permission_set",
+            "kind": "fk",
+            "from": "auth.Permission",
+            "field": "content_type"
+          }
+        ],
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/contenttypes/models.py",
+          "line": 134
+        }
+      },
+      {
+        "label": "sessions.Session",
+        "app": "sessions",
+        "name": "Session",
+        "db_table": "django_session",
+        "verbose_name": "session",
+        "pk": "session_key",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "django",
+        "fields": [
+          {
+            "name": "session_key",
+            "column": "session_key",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": true,
+            "max_length": 40,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "session_data",
+            "column": "session_data",
+            "type": "TextField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "expire_date",
+            "column": "expire_date",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [],
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/sessions/models.py",
+          "line": 8
+        }
+      },
+      {
+        "label": "shop.ActiveProduct",
+        "app": "shop",
+        "name": "ActiveProduct",
+        "db_table": "shop_product",
+        "verbose_name": "active product",
+        "pk": "id",
+        "ordering": [],
+        "proxy": true,
+        "proxy_for": "shop.Product",
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "created_at",
+            "column": "created_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "updated_at",
+            "column": "updated_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "name",
+            "column": "name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 200,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "sku",
+            "column": "sku",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 32,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "price",
+            "column": "price",
+            "type": "DecimalField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "stock",
+            "column": "stock",
+            "type": "IntegerField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "0",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "is_active",
+            "column": "is_active",
+            "type": "BooleanField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "True",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "category",
+            "column": "category_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "shop.Category",
+              "on_delete": "CASCADE",
+              "related_name": "products",
+              "through": null
+            }
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "orderitem_set",
+            "kind": "fk",
+            "from": "shop.OrderItem",
+            "field": "product"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/shop/models.py",
+          "line": 34
+        }
+      },
+      {
+        "label": "shop.Category",
+        "app": "shop",
+        "name": "Category",
+        "db_table": "shop_category",
+        "verbose_name": "category",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "created_at",
+            "column": "created_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "updated_at",
+            "column": "updated_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "name",
+            "column": "name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 100,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "slug",
+            "column": "slug",
+            "type": "SlugField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 50,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "parent",
+            "column": "parent_id",
+            "type": "ForeignKey",
+            "null": true,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "shop.Category",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "category_set",
+            "kind": "fk",
+            "from": "shop.Category",
+            "field": "parent"
+          },
+          {
+            "name": "products",
+            "kind": "fk",
+            "from": "shop.Product",
+            "field": "category"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/shop/models.py",
+          "line": 8
+        }
+      },
+      {
+        "label": "shop.Customer",
+        "app": "shop",
+        "name": "Customer",
+        "db_table": "shop_customer",
+        "verbose_name": "customer",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "created_at",
+            "column": "created_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "updated_at",
+            "column": "updated_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "user",
+            "column": "user_id",
+            "type": "OneToOneField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "o2o",
+              "to": "auth.User",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "phone",
+            "column": "phone",
+            "type": "CharField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 32,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "order_set",
+            "kind": "fk",
+            "from": "shop.Order",
+            "field": "customer"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/shop/models.py",
+          "line": 41
+        }
+      },
+      {
+        "label": "shop.Order",
+        "app": "shop",
+        "name": "Order",
+        "db_table": "shop_order",
+        "verbose_name": "order",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "created_at",
+            "column": "created_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "updated_at",
+            "column": "updated_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "customer",
+            "column": "customer_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "shop.Customer",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "status",
+            "column": "status",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 16,
+            "has_choices": true,
+            "default": "Order.Status.PENDING",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "total",
+            "column": "total",
+            "type": "DecimalField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "0",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "placed_at",
+            "column": "placed_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "<now>",
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "items",
+            "kind": "fk",
+            "from": "shop.OrderItem",
+            "field": "order"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/shop/models.py",
+          "line": 49
+        }
+      },
+      {
+        "label": "shop.OrderItem",
+        "app": "shop",
+        "name": "OrderItem",
+        "db_table": "shop_orderitem",
+        "verbose_name": "order item",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "created_at",
+            "column": "created_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "updated_at",
+            "column": "updated_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "order",
+            "column": "order_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "shop.Order",
+              "on_delete": "CASCADE",
+              "related_name": "items",
+              "through": null
+            }
+          },
+          {
+            "name": "product",
+            "column": "product_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "shop.Product",
+              "on_delete": "CASCADE",
+              "related_name": null,
+              "through": null
+            }
+          },
+          {
+            "name": "quantity",
+            "column": "quantity",
+            "type": "PositiveIntegerField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "1",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "unit_price",
+            "column": "unit_price",
+            "type": "DecimalField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          }
+        ],
+        "reverse_relations": [],
+        "source": {
+          "file": "/repo/sandbox/shop/models.py",
+          "line": 65
+        }
+      },
+      {
+        "label": "shop.Product",
+        "app": "shop",
+        "name": "Product",
+        "db_table": "shop_product",
+        "verbose_name": "product",
+        "pk": "id",
+        "ordering": [],
+        "proxy": false,
+        "proxy_for": null,
+        "origin": "local",
+        "fields": [
+          {
+            "name": "id",
+            "column": "id",
+            "type": "BigAutoField",
+            "null": false,
+            "blank": true,
+            "unique": true,
+            "primary_key": true,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "created_at",
+            "column": "created_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "updated_at",
+            "column": "updated_at",
+            "type": "DateTimeField",
+            "null": false,
+            "blank": true,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "name",
+            "column": "name",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": 200,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "sku",
+            "column": "sku",
+            "type": "CharField",
+            "null": false,
+            "blank": false,
+            "unique": true,
+            "primary_key": false,
+            "max_length": 32,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "price",
+            "column": "price",
+            "type": "DecimalField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "stock",
+            "column": "stock",
+            "type": "IntegerField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "0",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "is_active",
+            "column": "is_active",
+            "type": "BooleanField",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": "True",
+            "help_text": "",
+            "relation": null
+          },
+          {
+            "name": "category",
+            "column": "category_id",
+            "type": "ForeignKey",
+            "null": false,
+            "blank": false,
+            "unique": false,
+            "primary_key": false,
+            "max_length": null,
+            "has_choices": false,
+            "default": null,
+            "help_text": "",
+            "relation": {
+              "kind": "fk",
+              "to": "shop.Category",
+              "on_delete": "CASCADE",
+              "related_name": "products",
+              "through": null
+            }
+          }
+        ],
+        "reverse_relations": [
+          {
+            "name": "orderitem_set",
+            "kind": "fk",
+            "from": "shop.OrderItem",
+            "field": "product"
+          }
+        ],
+        "source": {
+          "file": "/repo/sandbox/shop/models.py",
+          "line": 17
+        }
+      }
+    ],
+    "endpoints": [
+      {
+        "id": "django:ANY:/",
+        "kind": "django",
+        "methods": [],
+        "path": "/",
+        "route": "/",
+        "url_name": "home",
+        "view": "config.views.home",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/config/views.py",
+          "line": 4
+        }
+      },
+      {
+        "id": "django:ANY:/admin/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/",
+        "route": "/admin/",
+        "url_name": "admin:index",
+        "view": "django.contrib.admin.sites.AdminSite.index",
+        "summary": "Display the main admin index page, which lists all of the installed",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 557
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/group/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/group/",
+        "route": "/admin/auth/group/",
+        "url_name": "admin:auth_group_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/group/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/group/add/",
+        "route": "/admin/auth/group/add/",
+        "url_name": "admin:auth_group_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/auth/group/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/auth/group/{object_id}/",
+        "route": "/admin/auth/group/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/group/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/group/{object_id}/change/",
+        "route": "/admin/auth/group/<path:object_id>/change/",
+        "url_name": "admin:auth_group_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/group/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/group/{object_id}/delete/",
+        "route": "/admin/auth/group/<path:object_id>/delete/",
+        "url_name": "admin:auth_group_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/group/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/group/{object_id}/history/",
+        "route": "/admin/auth/group/<path:object_id>/history/",
+        "url_name": "admin:auth_group_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/user/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/user/",
+        "route": "/admin/auth/user/",
+        "url_name": "admin:auth_user_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/user/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/user/add/",
+        "route": "/admin/auth/user/add/",
+        "url_name": "admin:auth_user_add",
+        "view": "django.contrib.auth.admin.UserAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/admin.py",
+          "line": 113
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/user/{id}/password/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/user/{id}/password/",
+        "route": "/admin/auth/user/<id>/password/",
+        "url_name": "admin:auth_user_password_change",
+        "view": "django.contrib.auth.admin.UserAdmin.user_change_password",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, id, form_url='')",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/admin.py",
+          "line": 149
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/auth/user/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/auth/user/{object_id}/",
+        "route": "/admin/auth/user/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/user/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/user/{object_id}/change/",
+        "route": "/admin/auth/user/<path:object_id>/change/",
+        "url_name": "admin:auth_user_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/user/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/user/{object_id}/delete/",
+        "route": "/admin/auth/user/<path:object_id>/delete/",
+        "url_name": "admin:auth_user_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/auth/user/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/auth/user/{object_id}/history/",
+        "route": "/admin/auth/user/<path:object_id>/history/",
+        "url_name": "admin:auth_user_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/autocomplete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/autocomplete/",
+        "route": "/admin/autocomplete/",
+        "url_name": "admin:autocomplete",
+        "view": "django.contrib.admin.sites.AdminSite.autocomplete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 451
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/author/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/author/",
+        "route": "/admin/blog/author/",
+        "url_name": "admin:blog_author_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/author/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/author/add/",
+        "route": "/admin/blog/author/add/",
+        "url_name": "admin:blog_author_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/blog/author/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/blog/author/{object_id}/",
+        "route": "/admin/blog/author/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/author/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/author/{object_id}/change/",
+        "route": "/admin/blog/author/<path:object_id>/change/",
+        "url_name": "admin:blog_author_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/author/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/author/{object_id}/delete/",
+        "route": "/admin/blog/author/<path:object_id>/delete/",
+        "url_name": "admin:blog_author_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/author/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/author/{object_id}/history/",
+        "route": "/admin/blog/author/<path:object_id>/history/",
+        "url_name": "admin:blog_author_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/comment/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/comment/",
+        "route": "/admin/blog/comment/",
+        "url_name": "admin:blog_comment_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/comment/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/comment/add/",
+        "route": "/admin/blog/comment/add/",
+        "url_name": "admin:blog_comment_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/blog/comment/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/blog/comment/{object_id}/",
+        "route": "/admin/blog/comment/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/comment/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/comment/{object_id}/change/",
+        "route": "/admin/blog/comment/<path:object_id>/change/",
+        "url_name": "admin:blog_comment_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/comment/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/comment/{object_id}/delete/",
+        "route": "/admin/blog/comment/<path:object_id>/delete/",
+        "url_name": "admin:blog_comment_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/comment/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/comment/{object_id}/history/",
+        "route": "/admin/blog/comment/<path:object_id>/history/",
+        "url_name": "admin:blog_comment_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/post/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/post/",
+        "route": "/admin/blog/post/",
+        "url_name": "admin:blog_post_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/post/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/post/add/",
+        "route": "/admin/blog/post/add/",
+        "url_name": "admin:blog_post_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/blog/post/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/blog/post/{object_id}/",
+        "route": "/admin/blog/post/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/post/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/post/{object_id}/change/",
+        "route": "/admin/blog/post/<path:object_id>/change/",
+        "url_name": "admin:blog_post_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/post/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/post/{object_id}/delete/",
+        "route": "/admin/blog/post/<path:object_id>/delete/",
+        "url_name": "admin:blog_post_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/post/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/post/{object_id}/history/",
+        "route": "/admin/blog/post/<path:object_id>/history/",
+        "url_name": "admin:blog_post_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/tag/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/tag/",
+        "route": "/admin/blog/tag/",
+        "url_name": "admin:blog_tag_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/tag/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/tag/add/",
+        "route": "/admin/blog/tag/add/",
+        "url_name": "admin:blog_tag_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/blog/tag/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/blog/tag/{object_id}/",
+        "route": "/admin/blog/tag/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/tag/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/tag/{object_id}/change/",
+        "route": "/admin/blog/tag/<path:object_id>/change/",
+        "url_name": "admin:blog_tag_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/tag/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/tag/{object_id}/delete/",
+        "route": "/admin/blog/tag/<path:object_id>/delete/",
+        "url_name": "admin:blog_tag_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/blog/tag/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/blog/tag/{object_id}/history/",
+        "route": "/admin/blog/tag/<path:object_id>/history/",
+        "url_name": "admin:blog_tag_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/jsi18n/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/jsi18n/",
+        "route": "/admin/jsi18n/",
+        "url_name": "admin:jsi18n",
+        "view": "django.contrib.admin.sites.AdminSite.i18n_javascript",
+        "summary": "Display the i18n JavaScript that the Django admin requires.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 383
+        }
+      },
+      {
+        "id": "django:ANY:/admin/login/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/login/",
+        "route": "/admin/login/",
+        "url_name": "admin:login",
+        "view": "django.contrib.admin.sites.AdminSite.login",
+        "summary": "Display the login form for the given HttpRequest.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 414
+        }
+      },
+      {
+        "id": "django:ANY:/admin/logout/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/logout/",
+        "route": "/admin/logout/",
+        "url_name": "admin:logout",
+        "view": "django.contrib.admin.sites.AdminSite.logout",
+        "summary": "Log out the user for the given HttpRequest.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 392
+        }
+      },
+      {
+        "id": "django:ANY:/admin/password_change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/password_change/",
+        "route": "/admin/password_change/",
+        "url_name": "admin:password_change",
+        "view": "django.contrib.admin.sites.AdminSite.password_change",
+        "summary": "Handle the \"change password\" task -- both form display and validation.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 351
+        }
+      },
+      {
+        "id": "django:ANY:/admin/password_change/done/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/password_change/done/",
+        "route": "/admin/password_change/done/",
+        "url_name": "admin:password_change_done",
+        "view": "django.contrib.admin.sites.AdminSite.password_change_done",
+        "summary": "Display the \"success\" page after a password change.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 369
+        }
+      },
+      {
+        "id": "django:ANY:/admin/r/{content_type_id}/{object_id}/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/r/{content_type_id}/{object_id}/",
+        "route": "/admin/r/<path:content_type_id>/<path:object_id>/",
+        "url_name": "admin:view_on_site",
+        "view": "django.contrib.contenttypes.views.shortcut",
+        "summary": "Redirect to an object's page based on a content-type ID and an object ID.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request, content_type_id, object_id)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/contenttypes/views.py",
+          "line": 9
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/activeproduct/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/activeproduct/",
+        "route": "/admin/shop/activeproduct/",
+        "url_name": "admin:shop_activeproduct_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/activeproduct/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/activeproduct/add/",
+        "route": "/admin/shop/activeproduct/add/",
+        "url_name": "admin:shop_activeproduct_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/shop/activeproduct/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/shop/activeproduct/{object_id}/",
+        "route": "/admin/shop/activeproduct/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/activeproduct/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/activeproduct/{object_id}/change/",
+        "route": "/admin/shop/activeproduct/<path:object_id>/change/",
+        "url_name": "admin:shop_activeproduct_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/activeproduct/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/activeproduct/{object_id}/delete/",
+        "route": "/admin/shop/activeproduct/<path:object_id>/delete/",
+        "url_name": "admin:shop_activeproduct_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/activeproduct/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/activeproduct/{object_id}/history/",
+        "route": "/admin/shop/activeproduct/<path:object_id>/history/",
+        "url_name": "admin:shop_activeproduct_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/category/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/category/",
+        "route": "/admin/shop/category/",
+        "url_name": "admin:shop_category_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/category/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/category/add/",
+        "route": "/admin/shop/category/add/",
+        "url_name": "admin:shop_category_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/shop/category/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/shop/category/{object_id}/",
+        "route": "/admin/shop/category/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/category/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/category/{object_id}/change/",
+        "route": "/admin/shop/category/<path:object_id>/change/",
+        "url_name": "admin:shop_category_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/category/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/category/{object_id}/delete/",
+        "route": "/admin/shop/category/<path:object_id>/delete/",
+        "url_name": "admin:shop_category_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/category/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/category/{object_id}/history/",
+        "route": "/admin/shop/category/<path:object_id>/history/",
+        "url_name": "admin:shop_category_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/customer/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/customer/",
+        "route": "/admin/shop/customer/",
+        "url_name": "admin:shop_customer_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/customer/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/customer/add/",
+        "route": "/admin/shop/customer/add/",
+        "url_name": "admin:shop_customer_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/shop/customer/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/shop/customer/{object_id}/",
+        "route": "/admin/shop/customer/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/customer/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/customer/{object_id}/change/",
+        "route": "/admin/shop/customer/<path:object_id>/change/",
+        "url_name": "admin:shop_customer_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/customer/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/customer/{object_id}/delete/",
+        "route": "/admin/shop/customer/<path:object_id>/delete/",
+        "url_name": "admin:shop_customer_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/customer/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/customer/{object_id}/history/",
+        "route": "/admin/shop/customer/<path:object_id>/history/",
+        "url_name": "admin:shop_customer_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/order/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/order/",
+        "route": "/admin/shop/order/",
+        "url_name": "admin:shop_order_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/order/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/order/add/",
+        "route": "/admin/shop/order/add/",
+        "url_name": "admin:shop_order_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/shop/order/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/shop/order/{object_id}/",
+        "route": "/admin/shop/order/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/order/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/order/{object_id}/change/",
+        "route": "/admin/shop/order/<path:object_id>/change/",
+        "url_name": "admin:shop_order_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/order/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/order/{object_id}/delete/",
+        "route": "/admin/shop/order/<path:object_id>/delete/",
+        "url_name": "admin:shop_order_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/order/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/order/{object_id}/history/",
+        "route": "/admin/shop/order/<path:object_id>/history/",
+        "url_name": "admin:shop_order_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/orderitem/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/orderitem/",
+        "route": "/admin/shop/orderitem/",
+        "url_name": "admin:shop_orderitem_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/orderitem/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/orderitem/add/",
+        "route": "/admin/shop/orderitem/add/",
+        "url_name": "admin:shop_orderitem_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/shop/orderitem/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/shop/orderitem/{object_id}/",
+        "route": "/admin/shop/orderitem/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/orderitem/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/orderitem/{object_id}/change/",
+        "route": "/admin/shop/orderitem/<path:object_id>/change/",
+        "url_name": "admin:shop_orderitem_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/orderitem/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/orderitem/{object_id}/delete/",
+        "route": "/admin/shop/orderitem/<path:object_id>/delete/",
+        "url_name": "admin:shop_orderitem_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/orderitem/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/orderitem/{object_id}/history/",
+        "route": "/admin/shop/orderitem/<path:object_id>/history/",
+        "url_name": "admin:shop_orderitem_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/product/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/product/",
+        "route": "/admin/shop/product/",
+        "url_name": "admin:shop_product_changelist",
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "summary": "The 'change list' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/product/add/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/product/add/",
+        "route": "/admin/shop/product/add/",
+        "url_name": "admin:shop_product_add",
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "id": "django:GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS:/admin/shop/product/{object_id}/",
+        "kind": "django",
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "PATCH",
+          "DELETE",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "path": "/admin/shop/product/{object_id}/",
+        "route": "/admin/shop/product/<path:object_id>/",
+        "url_name": null,
+        "view": "django.views.generic.base.RedirectView",
+        "summary": "Provide a redirect on any GET request.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/views/generic/base.py",
+          "line": 231
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/product/{object_id}/change/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/product/{object_id}/change/",
+        "route": "/admin/shop/product/<path:object_id>/change/",
+        "url_name": "admin:shop_product_change",
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, form_url='', extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/product/{object_id}/delete/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/product/{object_id}/delete/",
+        "route": "/admin/shop/product/<path:object_id>/delete/",
+        "url_name": "admin:shop_product_delete",
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "id": "django:ANY:/admin/shop/product/{object_id}/history/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/shop/product/{object_id}/history/",
+        "route": "/admin/shop/product/<path:object_id>/history/",
+        "url_name": "admin:shop_product_history",
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "summary": "The 'history' admin view for this model.",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, object_id, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/{app_label}/",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/{app_label}/",
+        "route": "/admin/(?P<app_label>auth|shop|blog)/",
+        "url_name": "admin:app_list",
+        "view": "django.contrib.admin.sites.AdminSite.app_index",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, app_label, extra_context=None)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 578
+        }
+      },
+      {
+        "id": "django:ANY:/admin/{url}",
+        "kind": "django",
+        "methods": [],
+        "path": "/admin/{url}",
+        "route": "/admin/(?P<url>.*)",
+        "url_name": null,
+        "view": "django.contrib.admin.sites.AdminSite.catch_all_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(self, request, url)",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 454
+        }
+      },
+      {
+        "id": "django:ANY:/api/v1/",
+        "kind": "django",
+        "methods": [],
+        "path": "/api/v1/",
+        "route": "/api/v1/",
+        "url_name": "api-v1:api-root",
+        "view": "ninja.openapi.views.default_home",
+        "summary": "This view is mainly needed to determine the full path for API operations",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request: django.http.request.HttpRequest, api: 'NinjaAPI', **kwargs: Any) -> NoReturn",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 13
+        }
+      },
+      {
+        "id": "django:ANY:/api/v1/docs",
+        "kind": "django",
+        "methods": [],
+        "path": "/api/v1/docs",
+        "route": "/api/v1/docs",
+        "url_name": "api-v1:openapi-view",
+        "view": "ninja.openapi.views.openapi_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request: django.http.request.HttpRequest, api: 'NinjaAPI', **kwargs: Any) -> django.http.response.HttpResponse",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 24
+        }
+      },
+      {
+        "id": "django:ANY:/api/v1/openapi.json",
+        "kind": "django",
+        "methods": [],
+        "path": "/api/v1/openapi.json",
+        "route": "/api/v1/openapi.json",
+        "url_name": "api-v1:openapi-json",
+        "view": "ninja.openapi.views.openapi_json",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request: django.http.request.HttpRequest, api: 'NinjaAPI', **kwargs: Any) -> django.http.response.HttpResponse",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 19
+        }
+      },
+      {
+        "id": "django:ANY:/api/v2/",
+        "kind": "django",
+        "methods": [],
+        "path": "/api/v2/",
+        "route": "/api/v2/",
+        "url_name": "api-v2:api-root",
+        "view": "ninja.openapi.views.default_home",
+        "summary": "This view is mainly needed to determine the full path for API operations",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request: django.http.request.HttpRequest, api: 'NinjaAPI', **kwargs: Any) -> NoReturn",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 13
+        }
+      },
+      {
+        "id": "django:ANY:/api/v2/docs",
+        "kind": "django",
+        "methods": [],
+        "path": "/api/v2/docs",
+        "route": "/api/v2/docs",
+        "url_name": "api-v2:openapi-view",
+        "view": "ninja.openapi.views.openapi_view",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request: django.http.request.HttpRequest, api: 'NinjaAPI', **kwargs: Any) -> django.http.response.HttpResponse",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 24
+        }
+      },
+      {
+        "id": "django:ANY:/api/v2/openapi.json",
+        "kind": "django",
+        "methods": [],
+        "path": "/api/v2/openapi.json",
+        "route": "/api/v2/openapi.json",
+        "url_name": "api-v2:openapi-json",
+        "view": "ninja.openapi.views.openapi_json",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request: django.http.request.HttpRequest, api: 'NinjaAPI', **kwargs: Any) -> django.http.response.HttpResponse",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 19
+        }
+      },
+      {
+        "id": "django:GET:/blog/",
+        "kind": "django",
+        "methods": [
+          "GET"
+        ],
+        "path": "/blog/",
+        "route": "/blog/",
+        "url_name": "blog:post-list",
+        "view": "blog.views.PostListView",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 10
+        }
+      },
+      {
+        "id": "django:ANY:/blog/archive/{year}/",
+        "kind": "django",
+        "methods": [],
+        "path": "/blog/archive/{year}/",
+        "route": "/blog/archive/<int:year>/",
+        "url_name": "blog:archive",
+        "view": "blog.views.archive",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request, year)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 18
+        }
+      },
+      {
+        "id": "django:GET:/blog/{slug}/",
+        "kind": "django",
+        "methods": [
+          "GET"
+        ],
+        "path": "/blog/{slug}/",
+        "route": "/blog/<slug:slug>/",
+        "url_name": "blog:post-detail",
+        "view": "blog.views.PostDetailView",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 14
+        }
+      },
+      {
+        "id": "django:ANY:/legacy/{pk}/",
+        "kind": "django",
+        "methods": [],
+        "path": "/legacy/{pk}/",
+        "route": "/legacy/(?P<pk>[0-9]+)/",
+        "url_name": "legacy-detail",
+        "view": "blog.views.legacy_detail",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request, pk)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 23
+        }
+      },
+      {
+        "id": "django:ANY:/shop/cart/",
+        "kind": "django",
+        "methods": [],
+        "path": "/shop/cart/",
+        "route": "/shop/cart/",
+        "url_name": "shop:cart",
+        "view": "shop.views.cart",
+        "summary": "",
+        "tags": [],
+        "api": null,
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/views.py",
+          "line": 4
+        }
+      },
+      {
+        "id": "ninja:api-v1:POST:/api/v1/auth/login",
+        "kind": "ninja",
+        "methods": [
+          "POST"
+        ],
+        "path": "/api/v1/auth/login",
+        "route": "/api/v1/auth/login",
+        "url_name": "api-v1:login",
+        "view": "shop.api.auth.login",
+        "summary": "Exchange credentials for the dev token.",
+        "tags": [
+          "auth"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, payload: shop.api.schemas.LoginIn)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/auth.py",
+          "line": 11
+        }
+      },
+      {
+        "id": "ninja:api-v1:GET:/api/v1/auth/me",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v1/auth/me",
+        "route": "/api/v1/auth/me",
+        "url_name": "api-v1:me",
+        "view": "shop.api.auth.me",
+        "summary": "Return the first user (the dev token has no user attached).",
+        "tags": [
+          "auth"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/auth.py",
+          "line": 20
+        }
+      },
+      {
+        "id": "ninja:api-v1:GET:/api/v1/health",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v1/health",
+        "route": "/api/v1/health",
+        "url_name": "api-v1:health",
+        "view": "config.api.health",
+        "summary": "",
+        "tags": [],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/config/api.py",
+          "line": 14
+        }
+      },
+      {
+        "id": "ninja:api-v1:GET:/api/v1/orders",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v1/orders",
+        "route": "/api/v1/orders",
+        "url_name": "api-v1:list_orders",
+        "view": "shop.api.orders.list_orders",
+        "summary": "List all orders.",
+        "tags": [
+          "orders"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 11
+        }
+      },
+      {
+        "id": "ninja:api-v1:POST:/api/v1/orders",
+        "kind": "ninja",
+        "methods": [
+          "POST"
+        ],
+        "path": "/api/v1/orders",
+        "route": "/api/v1/orders",
+        "url_name": "api-v1:create_order",
+        "view": "shop.api.orders.create_order",
+        "summary": "Create an order with items.",
+        "tags": [
+          "orders"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, payload: shop.api.schemas.OrderIn)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 17
+        }
+      },
+      {
+        "id": "ninja:api-v1:GET:/api/v1/orders/{order_id}",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v1/orders/{order_id}",
+        "route": "/api/v1/orders/<order_id>",
+        "url_name": "api-v1:get_order",
+        "view": "shop.api.orders.get_order",
+        "summary": "Fetch one order.",
+        "tags": [
+          "orders"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, order_id: int)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 34
+        }
+      },
+      {
+        "id": "ninja:api-v1:POST:/api/v1/orders/{order_id}/cancel",
+        "kind": "ninja",
+        "methods": [
+          "POST"
+        ],
+        "path": "/api/v1/orders/{order_id}/cancel",
+        "route": "/api/v1/orders/<order_id>/cancel",
+        "url_name": "api-v1:cancel_order",
+        "view": "shop.api.orders.cancel_order",
+        "summary": "Cancel an order (async view).",
+        "tags": [
+          "orders"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": true,
+        "signature": "(request, order_id: int)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 40
+        }
+      },
+      {
+        "id": "ninja:api-v1:GET:/api/v1/products",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v1/products",
+        "route": "/api/v1/products",
+        "url_name": "api-v1:list_products",
+        "view": "shop.api.products.list_products",
+        "summary": "List all products.",
+        "tags": [
+          "products"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 12
+        }
+      },
+      {
+        "id": "ninja:api-v1:POST:/api/v1/products",
+        "kind": "ninja",
+        "methods": [
+          "POST"
+        ],
+        "path": "/api/v1/products",
+        "route": "/api/v1/products",
+        "url_name": "api-v1:create_product",
+        "view": "shop.api.products.create_product",
+        "summary": "Create a product.",
+        "tags": [
+          "products"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, payload: shop.api.schemas.ProductIn)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 24
+        }
+      },
+      {
+        "id": "ninja:api-v1:DELETE:/api/v1/products/{product_id}",
+        "kind": "ninja",
+        "methods": [
+          "DELETE"
+        ],
+        "path": "/api/v1/products/{product_id}",
+        "route": "/api/v1/products/<product_id>",
+        "url_name": "api-v1:delete_product",
+        "view": "shop.api.products.delete_product",
+        "summary": "Delete a product.",
+        "tags": [
+          "products"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, product_id: int)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 40
+        }
+      },
+      {
+        "id": "ninja:api-v1:GET:/api/v1/products/{product_id}",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v1/products/{product_id}",
+        "route": "/api/v1/products/<product_id>",
+        "url_name": "api-v1:get_product",
+        "view": "shop.api.products.get_product",
+        "summary": "Fetch one product.",
+        "tags": [
+          "products"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, product_id: int)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 18
+        }
+      },
+      {
+        "id": "ninja:api-v1:PUT:/api/v1/products/{product_id}",
+        "kind": "ninja",
+        "methods": [
+          "PUT"
+        ],
+        "path": "/api/v1/products/{product_id}",
+        "route": "/api/v1/products/<product_id>",
+        "url_name": "api-v1:update_product",
+        "view": "shop.api.products.update_product",
+        "summary": "Replace a product.",
+        "tags": [
+          "products"
+        ],
+        "api": {
+          "title": "Shop API",
+          "version": "1.0.0",
+          "namespace": "api-v1"
+        },
+        "is_async": false,
+        "signature": "(request, product_id: int, payload: shop.api.schemas.ProductIn)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 30
+        }
+      },
+      {
+        "id": "ninja:api-v2:GET:/api/v2/ping",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v2/ping",
+        "route": "/api/v2/ping",
+        "url_name": "api-v2:ping",
+        "view": "shop.api.v2.ping",
+        "summary": "",
+        "tags": [
+          "v2"
+        ],
+        "api": {
+          "title": "NinjaAPI",
+          "version": "2.0.0",
+          "namespace": "api-v2"
+        },
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/v2.py",
+          "line": 22
+        }
+      },
+      {
+        "id": "ninja:api-v2:GET:/api/v2/products",
+        "kind": "ninja",
+        "methods": [
+          "GET"
+        ],
+        "path": "/api/v2/products",
+        "route": "/api/v2/products",
+        "url_name": "api-v2:list_products_v2",
+        "view": "shop.api.v2.list_products_v2",
+        "summary": "List products (v2 shape).",
+        "tags": [
+          "v2"
+        ],
+        "api": {
+          "title": "NinjaAPI",
+          "version": "2.0.0",
+          "namespace": "api-v2"
+        },
+        "is_async": false,
+        "signature": "(request)",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/v2.py",
+          "line": 16
+        }
+      }
+    ],
+    "url_names": [
+      {
+        "name": "admin:app_list",
+        "namespace": "admin",
+        "route": "/admin/(?P<app_label>auth|shop|blog)/",
+        "args": [
+          "app_label"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.app_index",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 578
+        }
+      },
+      {
+        "name": "admin:auth_group_add",
+        "namespace": "admin",
+        "route": "/admin/auth/group/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:auth_group_change",
+        "namespace": "admin",
+        "route": "/admin/auth/group/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:auth_group_changelist",
+        "namespace": "admin",
+        "route": "/admin/auth/group/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:auth_group_delete",
+        "namespace": "admin",
+        "route": "/admin/auth/group/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:auth_group_history",
+        "namespace": "admin",
+        "route": "/admin/auth/group/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:auth_user_add",
+        "namespace": "admin",
+        "route": "/admin/auth/user/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.auth.admin.UserAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/admin.py",
+          "line": 113
+        }
+      },
+      {
+        "name": "admin:auth_user_change",
+        "namespace": "admin",
+        "route": "/admin/auth/user/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:auth_user_changelist",
+        "namespace": "admin",
+        "route": "/admin/auth/user/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:auth_user_delete",
+        "namespace": "admin",
+        "route": "/admin/auth/user/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:auth_user_history",
+        "namespace": "admin",
+        "route": "/admin/auth/user/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:auth_user_password_change",
+        "namespace": "admin",
+        "route": "/admin/auth/user/<id>/password/",
+        "args": [
+          "id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.auth.admin.UserAdmin.user_change_password",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/admin.py",
+          "line": 149
+        }
+      },
+      {
+        "name": "admin:autocomplete",
+        "namespace": "admin",
+        "route": "/admin/autocomplete/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.autocomplete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 451
+        }
+      },
+      {
+        "name": "admin:blog_author_add",
+        "namespace": "admin",
+        "route": "/admin/blog/author/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:blog_author_change",
+        "namespace": "admin",
+        "route": "/admin/blog/author/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:blog_author_changelist",
+        "namespace": "admin",
+        "route": "/admin/blog/author/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:blog_author_delete",
+        "namespace": "admin",
+        "route": "/admin/blog/author/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:blog_author_history",
+        "namespace": "admin",
+        "route": "/admin/blog/author/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:blog_comment_add",
+        "namespace": "admin",
+        "route": "/admin/blog/comment/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:blog_comment_change",
+        "namespace": "admin",
+        "route": "/admin/blog/comment/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:blog_comment_changelist",
+        "namespace": "admin",
+        "route": "/admin/blog/comment/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:blog_comment_delete",
+        "namespace": "admin",
+        "route": "/admin/blog/comment/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:blog_comment_history",
+        "namespace": "admin",
+        "route": "/admin/blog/comment/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:blog_post_add",
+        "namespace": "admin",
+        "route": "/admin/blog/post/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:blog_post_change",
+        "namespace": "admin",
+        "route": "/admin/blog/post/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:blog_post_changelist",
+        "namespace": "admin",
+        "route": "/admin/blog/post/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:blog_post_delete",
+        "namespace": "admin",
+        "route": "/admin/blog/post/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:blog_post_history",
+        "namespace": "admin",
+        "route": "/admin/blog/post/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:blog_tag_add",
+        "namespace": "admin",
+        "route": "/admin/blog/tag/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:blog_tag_change",
+        "namespace": "admin",
+        "route": "/admin/blog/tag/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:blog_tag_changelist",
+        "namespace": "admin",
+        "route": "/admin/blog/tag/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:blog_tag_delete",
+        "namespace": "admin",
+        "route": "/admin/blog/tag/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:blog_tag_history",
+        "namespace": "admin",
+        "route": "/admin/blog/tag/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:index",
+        "namespace": "admin",
+        "route": "/admin/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.index",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 557
+        }
+      },
+      {
+        "name": "admin:jsi18n",
+        "namespace": "admin",
+        "route": "/admin/jsi18n/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.i18n_javascript",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 383
+        }
+      },
+      {
+        "name": "admin:login",
+        "namespace": "admin",
+        "route": "/admin/login/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.login",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 414
+        }
+      },
+      {
+        "name": "admin:logout",
+        "namespace": "admin",
+        "route": "/admin/logout/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.logout",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 392
+        }
+      },
+      {
+        "name": "admin:password_change",
+        "namespace": "admin",
+        "route": "/admin/password_change/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.password_change",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 351
+        }
+      },
+      {
+        "name": "admin:password_change_done",
+        "namespace": "admin",
+        "route": "/admin/password_change/done/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.sites.AdminSite.password_change_done",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/sites.py",
+          "line": 369
+        }
+      },
+      {
+        "name": "admin:shop_activeproduct_add",
+        "namespace": "admin",
+        "route": "/admin/shop/activeproduct/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:shop_activeproduct_change",
+        "namespace": "admin",
+        "route": "/admin/shop/activeproduct/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:shop_activeproduct_changelist",
+        "namespace": "admin",
+        "route": "/admin/shop/activeproduct/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:shop_activeproduct_delete",
+        "namespace": "admin",
+        "route": "/admin/shop/activeproduct/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:shop_activeproduct_history",
+        "namespace": "admin",
+        "route": "/admin/shop/activeproduct/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:shop_category_add",
+        "namespace": "admin",
+        "route": "/admin/shop/category/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:shop_category_change",
+        "namespace": "admin",
+        "route": "/admin/shop/category/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:shop_category_changelist",
+        "namespace": "admin",
+        "route": "/admin/shop/category/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:shop_category_delete",
+        "namespace": "admin",
+        "route": "/admin/shop/category/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:shop_category_history",
+        "namespace": "admin",
+        "route": "/admin/shop/category/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:shop_customer_add",
+        "namespace": "admin",
+        "route": "/admin/shop/customer/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:shop_customer_change",
+        "namespace": "admin",
+        "route": "/admin/shop/customer/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:shop_customer_changelist",
+        "namespace": "admin",
+        "route": "/admin/shop/customer/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:shop_customer_delete",
+        "namespace": "admin",
+        "route": "/admin/shop/customer/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:shop_customer_history",
+        "namespace": "admin",
+        "route": "/admin/shop/customer/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:shop_order_add",
+        "namespace": "admin",
+        "route": "/admin/shop/order/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:shop_order_change",
+        "namespace": "admin",
+        "route": "/admin/shop/order/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:shop_order_changelist",
+        "namespace": "admin",
+        "route": "/admin/shop/order/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:shop_order_delete",
+        "namespace": "admin",
+        "route": "/admin/shop/order/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:shop_order_history",
+        "namespace": "admin",
+        "route": "/admin/shop/order/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:shop_orderitem_add",
+        "namespace": "admin",
+        "route": "/admin/shop/orderitem/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:shop_orderitem_change",
+        "namespace": "admin",
+        "route": "/admin/shop/orderitem/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:shop_orderitem_changelist",
+        "namespace": "admin",
+        "route": "/admin/shop/orderitem/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:shop_orderitem_delete",
+        "namespace": "admin",
+        "route": "/admin/shop/orderitem/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:shop_orderitem_history",
+        "namespace": "admin",
+        "route": "/admin/shop/orderitem/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:shop_product_add",
+        "namespace": "admin",
+        "route": "/admin/shop/product/add/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.add_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2248
+        }
+      },
+      {
+        "name": "admin:shop_product_change",
+        "namespace": "admin",
+        "route": "/admin/shop/product/<path:object_id>/change/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.change_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2251
+        }
+      },
+      {
+        "name": "admin:shop_product_changelist",
+        "namespace": "admin",
+        "route": "/admin/shop/product/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.changelist_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2321
+        }
+      },
+      {
+        "name": "admin:shop_product_delete",
+        "namespace": "admin",
+        "route": "/admin/shop/product/<path:object_id>/delete/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.delete_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2503
+        }
+      },
+      {
+        "name": "admin:shop_product_history",
+        "namespace": "admin",
+        "route": "/admin/shop/product/<path:object_id>/history/",
+        "args": [
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.admin.options.ModelAdmin.history_view",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/admin/options.py",
+          "line": 2578
+        }
+      },
+      {
+        "name": "admin:view_on_site",
+        "namespace": "admin",
+        "route": "/admin/r/<path:content_type_id>/<path:object_id>/",
+        "args": [
+          "content_type_id",
+          "object_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "django.contrib.contenttypes.views.shortcut",
+        "origin": "django",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/contenttypes/views.py",
+          "line": 9
+        }
+      },
+      {
+        "name": "api-v1:api-root",
+        "namespace": "api-v1",
+        "route": "/api/v1/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "ninja.openapi.views.default_home",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 13
+        }
+      },
+      {
+        "name": "api-v1:cancel_order",
+        "namespace": "api-v1",
+        "route": "/api/v1/orders/<order_id>/cancel",
+        "args": [
+          "order_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "shop.api.orders.cancel_order",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 40
+        }
+      },
+      {
+        "name": "api-v1:create_order",
+        "namespace": "api-v1",
+        "route": "/api/v1/orders",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.orders.create_order",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 17
+        }
+      },
+      {
+        "name": "api-v1:create_product",
+        "namespace": "api-v1",
+        "route": "/api/v1/products",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.products.create_product",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 24
+        }
+      },
+      {
+        "name": "api-v1:delete_product",
+        "namespace": "api-v1",
+        "route": "/api/v1/products/<product_id>",
+        "args": [
+          "product_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "shop.api.products.delete_product",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 40
+        }
+      },
+      {
+        "name": "api-v1:get_order",
+        "namespace": "api-v1",
+        "route": "/api/v1/orders/<order_id>",
+        "args": [
+          "order_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "shop.api.orders.get_order",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 34
+        }
+      },
+      {
+        "name": "api-v1:get_product",
+        "namespace": "api-v1",
+        "route": "/api/v1/products/<product_id>",
+        "args": [
+          "product_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "shop.api.products.get_product",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 18
+        }
+      },
+      {
+        "name": "api-v1:health",
+        "namespace": "api-v1",
+        "route": "/api/v1/health",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "config.api.health",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/config/api.py",
+          "line": 14
+        }
+      },
+      {
+        "name": "api-v1:list_orders",
+        "namespace": "api-v1",
+        "route": "/api/v1/orders",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.orders.list_orders",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/orders.py",
+          "line": 11
+        }
+      },
+      {
+        "name": "api-v1:list_products",
+        "namespace": "api-v1",
+        "route": "/api/v1/products",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.products.list_products",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 12
+        }
+      },
+      {
+        "name": "api-v1:login",
+        "namespace": "api-v1",
+        "route": "/api/v1/auth/login",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.auth.login",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/auth.py",
+          "line": 11
+        }
+      },
+      {
+        "name": "api-v1:me",
+        "namespace": "api-v1",
+        "route": "/api/v1/auth/me",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.auth.me",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/auth.py",
+          "line": 20
+        }
+      },
+      {
+        "name": "api-v1:openapi-json",
+        "namespace": "api-v1",
+        "route": "/api/v1/openapi.json",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "ninja.openapi.views.openapi_json",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 19
+        }
+      },
+      {
+        "name": "api-v1:openapi-view",
+        "namespace": "api-v1",
+        "route": "/api/v1/docs",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "ninja.openapi.views.openapi_view",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 24
+        }
+      },
+      {
+        "name": "api-v1:update_product",
+        "namespace": "api-v1",
+        "route": "/api/v1/products/<product_id>",
+        "args": [
+          "product_id"
+        ],
+        "unnamed_groups": 0,
+        "view": "shop.api.products.update_product",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/products.py",
+          "line": 30
+        }
+      },
+      {
+        "name": "api-v2:api-root",
+        "namespace": "api-v2",
+        "route": "/api/v2/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "ninja.openapi.views.default_home",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 13
+        }
+      },
+      {
+        "name": "api-v2:list_products_v2",
+        "namespace": "api-v2",
+        "route": "/api/v2/products",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.v2.list_products_v2",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/v2.py",
+          "line": 16
+        }
+      },
+      {
+        "name": "api-v2:openapi-json",
+        "namespace": "api-v2",
+        "route": "/api/v2/openapi.json",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "ninja.openapi.views.openapi_json",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 19
+        }
+      },
+      {
+        "name": "api-v2:openapi-view",
+        "namespace": "api-v2",
+        "route": "/api/v2/docs",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "ninja.openapi.views.openapi_view",
+        "origin": "third_party",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/openapi/views.py",
+          "line": 24
+        }
+      },
+      {
+        "name": "api-v2:ping",
+        "namespace": "api-v2",
+        "route": "/api/v2/ping",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.api.v2.ping",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/api/v2.py",
+          "line": 22
+        }
+      },
+      {
+        "name": "blog:archive",
+        "namespace": "blog",
+        "route": "/blog/archive/<int:year>/",
+        "args": [
+          "year"
+        ],
+        "unnamed_groups": 0,
+        "view": "blog.views.archive",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 18
+        }
+      },
+      {
+        "name": "blog:post-detail",
+        "namespace": "blog",
+        "route": "/blog/<slug:slug>/",
+        "args": [
+          "slug"
+        ],
+        "unnamed_groups": 0,
+        "view": "blog.views.PostDetailView",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 14
+        }
+      },
+      {
+        "name": "blog:post-list",
+        "namespace": "blog",
+        "route": "/blog/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "blog.views.PostListView",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "home",
+        "namespace": null,
+        "route": "/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "config.views.home",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/config/views.py",
+          "line": 4
+        }
+      },
+      {
+        "name": "legacy-detail",
+        "namespace": null,
+        "route": "/legacy/(?P<pk>[0-9]+)/",
+        "args": [
+          "pk"
+        ],
+        "unnamed_groups": 0,
+        "view": "blog.views.legacy_detail",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/blog/views.py",
+          "line": 23
+        }
+      },
+      {
+        "name": "shop:cart",
+        "namespace": "shop",
+        "route": "/shop/cart/",
+        "args": [],
+        "unnamed_groups": 0,
+        "view": "shop.views.cart",
+        "origin": "local",
+        "source": {
+          "file": "/repo/sandbox/shop/views.py",
+          "line": 4
+        }
+      }
+    ],
+    "commands": [
+      {
+        "name": "export_orders",
+        "app": "shop",
+        "origin": "local",
+        "help": "Export all orders as CSV to stdout.",
+        "source": {
+          "file": "/repo/sandbox/shop/management/commands/export_orders.py",
+          "line": 8
+        }
+      },
+      {
+        "name": "seed_blog",
+        "app": "blog",
+        "origin": "local",
+        "help": "Seed the blog with authors, posts, tags and comments.",
+        "source": {
+          "file": "/repo/sandbox/blog/management/commands/seed_blog.py",
+          "line": 8
+        }
+      },
+      {
+        "name": "seed_shop",
+        "app": "shop",
+        "origin": "local",
+        "help": "Seed the shop with categories, products, customers and orders.",
+        "source": {
+          "file": "/repo/sandbox/shop/management/commands/seed_shop.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "export_openapi_schema",
+        "app": "ninja",
+        "origin": "third_party",
+        "help": "Exports Open API schema",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/ninja/management/commands/export_openapi_schema.py",
+          "line": 14
+        }
+      },
+      {
+        "name": "changepassword",
+        "app": "auth",
+        "origin": "django",
+        "help": "Change a user's password for django.contrib.auth.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/management/commands/changepassword.py",
+          "line": 12
+        }
+      },
+      {
+        "name": "check",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Checks the entire Django project for potential problems.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/check.py",
+          "line": 8
+        }
+      },
+      {
+        "name": "clearsessions",
+        "app": "sessions",
+        "origin": "django",
+        "help": "Can be run as a cronjob or directly to clean out expired sessions when the backend supports it.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/sessions/management/commands/clearsessions.py",
+          "line": 7
+        }
+      },
+      {
+        "name": "collectstatic",
+        "app": "staticfiles",
+        "origin": "django",
+        "help": "Collect static files in a single location.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py",
+          "line": 13
+        }
+      },
+      {
+        "name": "compilemessages",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Compiles .po files to .mo files for use with builtin gettext support.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/compilemessages.py",
+          "line": 29
+        }
+      },
+      {
+        "name": "createcachetable",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Creates the tables needed to use the SQL cache backend.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/createcachetable.py",
+          "line": 15
+        }
+      },
+      {
+        "name": "createsuperuser",
+        "app": "auth",
+        "origin": "django",
+        "help": "Used to create a superuser.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/auth/management/commands/createsuperuser.py",
+          "line": 26
+        }
+      },
+      {
+        "name": "dbshell",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Runs the command-line client for specified database, or the default database if none is provided.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/dbshell.py",
+          "line": 7
+        }
+      },
+      {
+        "name": "diffsettings",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Displays differences between the current settings.py and Django's\n    default settings.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/diffsettings.py",
+          "line": 9
+        }
+      },
+      {
+        "name": "dumpdata",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Output the contents of the database as a fixture of the given format (using each model's default manager unless --all is specified).",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/dumpdata.py",
+          "line": 30
+        }
+      },
+      {
+        "name": "findstatic",
+        "app": "staticfiles",
+        "origin": "django",
+        "help": "Finds the absolute paths for the given static file(s).",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/staticfiles/management/commands/findstatic.py",
+          "line": 7
+        }
+      },
+      {
+        "name": "flush",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Removes ALL DATA from the database, including data added during migrations. Does not achieve a \"fresh install\" state.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/flush.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "inspectdb",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Introspects the database tables in the given database and outputs a Django model module.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/inspectdb.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "loaddata",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Installs the named fixture(s) in the database.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/loaddata.py",
+          "line": 44
+        }
+      },
+      {
+        "name": "makemessages",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Runs over the entire source tree of the current directory and pulls out all strings marked for translation. It creates (or updates) a message file in the conf/locale (in the django tree) or locale (for projects and applications) directory.\n\nYou must run this command with one of either the --locale, --exclude, or --all options.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/makemessages.py",
+          "line": 199
+        }
+      },
+      {
+        "name": "makemigrations",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Creates new migration(s) for apps.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/makemigrations.py",
+          "line": 26
+        }
+      },
+      {
+        "name": "migrate",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Updates database schema. Manages both apps with migrations and those without.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/migrate.py",
+          "line": 18
+        }
+      },
+      {
+        "name": "optimizemigration",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Optimizes the operations for the named migration.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/optimizemigration.py",
+          "line": 15
+        }
+      },
+      {
+        "name": "remove_stale_contenttypes",
+        "app": "contenttypes",
+        "origin": "django",
+        "help": "Deletes stale content types in the database.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/contenttypes/management/commands/remove_stale_contenttypes.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "runserver",
+        "app": "staticfiles",
+        "origin": "django",
+        "help": "Starts a lightweight web server for development and also serves static files.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/contrib/staticfiles/management/commands/runserver.py",
+          "line": 6
+        }
+      },
+      {
+        "name": "sendtestemail",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Sends a test email to the email addresses specified as arguments.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/sendtestemail.py",
+          "line": 8
+        }
+      },
+      {
+        "name": "shell",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Runs a Python interactive interpreter. Tries to use IPython or bpython, if one of them is available. Any standard input is executed as code.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/shell.py",
+          "line": 15
+        }
+      },
+      {
+        "name": "showmigrations",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Shows all available migrations for the current project",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/showmigrations.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "sqlflush",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Returns a list of the SQL statements required to return all tables in the database to the state they were in just after they were installed.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/sqlflush.py",
+          "line": 6
+        }
+      },
+      {
+        "name": "sqlmigrate",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Prints the SQL statements for the named migration.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/sqlmigrate.py",
+          "line": 7
+        }
+      },
+      {
+        "name": "sqlsequencereset",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Prints the SQL statements for resetting sequences for the given app name(s).",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/sqlsequencereset.py",
+          "line": 5
+        }
+      },
+      {
+        "name": "squashmigrations",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Squashes an existing set of migrations (from first until specified) into a single new one.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/squashmigrations.py",
+          "line": 15
+        }
+      },
+      {
+        "name": "startapp",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Creates a Django app directory structure for the given app name in the current directory or optionally in the given directory.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/startapp.py",
+          "line": 4
+        }
+      },
+      {
+        "name": "startproject",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Creates a Django project directory structure for the given project name in the current directory or optionally in the given directory.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/startproject.py",
+          "line": 6
+        }
+      },
+      {
+        "name": "test",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Discover and run tests in the specified modules or the current directory.",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/test.py",
+          "line": 10
+        }
+      },
+      {
+        "name": "testserver",
+        "app": "django.core",
+        "origin": "django",
+        "help": "Runs a development server with data from the given fixture(s).",
+        "source": {
+          "file": "/repo/.venv/lib/python3.14/site-packages/django/core/management/commands/testserver.py",
+          "line": 6
+        }
+      }
+    ]
+  },
+  "warnings": []
+}

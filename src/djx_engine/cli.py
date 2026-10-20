@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 import traceback
 from datetime import UTC, datetime
 from typing import Any
@@ -70,6 +71,7 @@ def _run(args: argparse.Namespace) -> dict[str, Any]:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    started = time.perf_counter()
     real_stdout = sys.stdout
     sys.stdout = sys.stderr  # user code may print() while we import it
     try:
@@ -83,6 +85,8 @@ def main(argv: list[str] | None = None) -> int:
         traceback.print_exc()
     finally:
         sys.stdout = real_stdout
+    elapsed = time.perf_counter() - started
+    print(f"djx_engine: {args.command} took {elapsed:.2f}s", file=sys.stderr)
     real_stdout.write(json.dumps(envelope, default=str) + "\n")
     real_stdout.flush()
     return 0 if envelope["ok"] else 2
