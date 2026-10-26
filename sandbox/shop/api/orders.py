@@ -21,7 +21,10 @@ def create_order(request, payload: OrderIn):
         order = Order.objects.create(customer_id=payload.customer_id)
         total = 0
         for item in payload.items:
-            product = get_object_or_404(Product, id=item.product_id)
+            try:
+                product = Product.objects.get(id=item.product_id)
+            except Product.DoesNotExist:
+                continue
             OrderItem.objects.create(
                 order=order, product=product, quantity=item.quantity, unit_price=product.price
             )
