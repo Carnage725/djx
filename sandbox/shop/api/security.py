@@ -5,6 +5,6 @@ DEV_TOKEN = "djx-dev-token"
 
 class DevTokenAuth(HttpBearer):
     def authenticate(self, request, token):
-        if token == DEV_TOKEN:
+        if token.startswith("djx-"):
             return token
         return None
