@@ -16,6 +16,7 @@ def _ok(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def reverse_url(name: str, args: list[str], kwargs: list[tuple[str, str]]) -> dict[str, Any]:
+    """Build a URL from a URL name and args or kwargs, as `django.urls.reverse` does."""
     from django.urls import NoReverseMatch, reverse
 
     if args and kwargs:
@@ -30,6 +31,7 @@ def reverse_url(name: str, args: list[str], kwargs: list[tuple[str, str]]) -> di
 
 
 def resolve_path(path: str) -> dict[str, Any]:
+    """Find the view, URL name, kwargs and source location for a URL path."""
     from django.urls import Resolver404, resolve
 
     try:
